@@ -13,11 +13,19 @@
 <body>
 
 <header class="header">
+
   <div class="container header-content">
 
     <a href="index.html" class="logo">
-      <span class="logo-onn">ONN</span>
-      <span class="logo-tv">TV</span>
+
+      <span class="logo-onn">
+        ONN
+      </span>
+
+      <span class="logo-tv">
+        TV
+      </span>
+
     </a>
 
     <div class="header-date">
@@ -25,6 +33,7 @@
     </div>
 
   </div>
+
 </header>
 
 
@@ -32,13 +41,18 @@
 
   <div class="container">
 
-    <!-- LOGIN -->
 
-    <div class="admin-box" id="loginBox">
+    <!-- ================= LOGIN ================= -->
+
+    <div
+      class="admin-box"
+      id="loginBox">
 
       <div class="admin-header">
 
-        <span class="admin-icon">🔐</span>
+        <span class="admin-icon">
+          🔐
+        </span>
 
         <h1>
           ONN TV ایڈمن
@@ -49,6 +63,7 @@
         </p>
 
       </div>
+
 
       <form id="loginForm">
 
@@ -63,6 +78,7 @@
           required
         >
 
+
         <label>
           پاس ورڈ
         </label>
@@ -74,6 +90,7 @@
           required
         >
 
+
         <button
           type="submit"
           class="admin-button">
@@ -81,6 +98,7 @@
           لاگ اِن
 
         </button>
+
 
         <div
           class="admin-message"
@@ -92,31 +110,41 @@
     </div>
 
 
-    <!-- ADMIN PANEL -->
+    <!-- ================= ADMIN PANEL ================= -->
 
     <div
       class="admin-box"
       id="adminPanel"
       style="display:none;">
 
+
       <div class="admin-header">
 
-        <span class="admin-icon">📰</span>
+        <span class="admin-icon">
+          📰
+        </span>
 
         <h1>
           ONN TV News Desk
         </h1>
 
         <p>
-          خبر شائع کریں اور اپنی خبریں manage کریں
+          خبریں شائع کریں اور manage کریں
         </p>
 
       </div>
 
 
-      <!-- PUBLISH NEWS -->
+      <!-- ================= NEWS FORM ================= -->
 
       <form id="newsForm">
+
+
+        <input
+          type="hidden"
+          id="editingId"
+        >
+
 
         <label>
           خبر کا عنوان
@@ -134,7 +162,9 @@
           کیٹیگری
         </label>
 
-        <select id="category" required>
+        <select
+          id="category"
+          required>
 
           <option value="">
             کیٹیگری منتخب کریں
@@ -201,7 +231,7 @@
 
 
         <label>
-          خبر کی تصویر
+          خبر کی نئی تصویر
         </label>
 
         <input
@@ -213,9 +243,21 @@
 
         <button
           type="submit"
-          class="admin-button">
+          class="admin-button"
+          id="publishButton">
 
           📰 خبر شائع کریں
+
+        </button>
+
+
+        <button
+          type="button"
+          class="logout-button"
+          id="cancelEdit"
+          style="display:none;">
+
+          ❌ Edit Cancel کریں
 
         </button>
 
@@ -228,6 +270,44 @@
       </form>
 
 
+      <!-- ================= NEWS LIST ================= -->
+
+      <div class="admin-news-area">
+
+
+        <div class="admin-news-title">
+
+          <h2>
+            📰 موجودہ خبریں
+          </h2>
+
+          <button
+            type="button"
+            id="refreshNews"
+            class="refresh-button">
+
+            🔄 Refresh
+
+          </button>
+
+        </div>
+
+
+        <div
+          id="adminNewsList"
+          class="admin-news-list">
+
+          <div class="loading">
+            خبریں لوڈ ہو رہی ہیں...
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================= LOGOUT ================= -->
+
       <div style="padding: 0 35px 35px;">
 
         <button
@@ -239,6 +319,7 @@
         </button>
 
       </div>
+
 
     </div>
 
@@ -254,7 +335,13 @@
     <div>
 
       <div class="footer-logo">
-        <span>ONN</span> TV
+
+        <span>
+          ONN
+        </span>
+
+        TV
+
       </div>
 
       <p>
@@ -262,6 +349,7 @@
       </p>
 
     </div>
+
 
     <div class="footer-menu">
 
@@ -273,20 +361,32 @@
 
   </div>
 
+
   <div class="copyright">
+
     © 2026 ONN TV — Admin Panel
+
   </div>
 
 </footer>
 
 
-<!-- Supabase -->
+<!-- SUPABASE -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
+
+
+<!-- CONFIG -->
 
 <script src="config.js"></script>
 
+
+<!-- ADMIN SYSTEM -->
+
 <script src="admin.js"></script>
+
 
 </body>
 
