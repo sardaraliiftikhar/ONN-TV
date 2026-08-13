@@ -1,26 +1,35 @@
-// ONN TV starter JavaScript
-const menuBtn = document.getElementById("menuBtn");
-const nav = document.getElementById("mainNav");
-const searchBtn = document.getElementById("searchBtn");
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
-if (menuBtn && nav) {
-  menuBtn.addEventListener("click", () => {
-    nav.style.display = nav.style.display === "flex" ? "none" : "flex";
-    nav.style.position = "absolute";
-    nav.style.top = "72px";
-    nav.style.left = "0";
-    nav.style.right = "0";
-    nav.style.background = "#fff";
-    nav.style.padding = "18px 4%";
-    nav.style.flexDirection = "column";
-    nav.style.alignItems = "flex-start";
-    nav.style.borderBottom = "1px solid #e4e6ea";
-  });
+async function loadNews() {
+  const { data, error } = await supabaseClient
+    .from("news")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Supabase error:", error);
+    return;
+  }
+
+  console.log("ONN TV News:", data);
+
+  if (!data || data.length === 0) return;
+
+  const latestNews = document.getElementById("latestNews");
+
+  latestNews.innerHTML = data.slice(0, 5).map((news, index) => `
+    <article class="mini-card">
+      <div class="mini-thumb">${String(index + 1).padStart(2, "0")}</div>
+      <div>
+        <span>${news.category || "News"}</span>
+        <h3>${news.title}</h3>
+        <small>${new Date(news.created_at).toLocaleString()}</small>
+      </div>
+    </article>
+  `).join("");
 }
 
-if (searchBtn) {
-  searchBtn.addEventListener("click", () => {
-    const query = prompt("Search ONN TV:");
-    if (query) alert("Search system will be connected to Supabase in the next step.");
-  });
-}
+loadNews();
