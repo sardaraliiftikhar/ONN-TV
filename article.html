@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Article | ONN TV</title>
+  <title>ONN TV | News</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=11">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
@@ -15,151 +15,84 @@
 
 <body>
 
-<header class="header">
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="page">
+      <span id="date"></span>
+      <span>ONN TV • Online News Network</span>
+    </div>
+  </div>
 
-  <div class="container header-inner">
 
-    <a class="logo" href="index.html">
-      <span>ONN</span> TV
+  <!-- HEADER -->
+  <header class="header">
+
+    <div class="page header-inner">
+
+      <a href="index.html" class="logo">
+        <span>ONN</span> TV
+      </a>
+
+      <nav class="menu">
+        <a href="index.html">Home</a>
+        <a href="index.html#latest">Latest</a>
+        <a href="index.html#pakistan">Pakistan</a>
+        <a href="index.html#world">World</a>
+        <a href="index.html#sports">Sports</a>
+        <a href="index.html#business">Business</a>
+        <a href="index.html#technology">Technology</a>
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <!-- BREAKING -->
+  <div class="breaking">
+    <div class="page breaking-inner">
+      <strong>BREAKING</strong>
+      <span>ONN TV — Online News Network</span>
+    </div>
+  </div>
+
+
+  <!-- ARTICLE -->
+  <main class="page article-container">
+
+    <a href="index.html" class="back-button">
+      ← Back to Home
     </a>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="index.html#pakistan">Pakistan</a>
-      <a href="index.html#world">World</a>
-      <a href="index.html#sports">Sports</a>
-      <a href="index.html#business">Business</a>
-      <a href="index.html#technology">Technology</a>
-    </nav>
+    <article id="article">
 
-  </div>
+      <div class="article-loading">
+        Loading story...
+      </div>
 
-</header>
+    </article>
+
+  </main>
 
 
-<main class="container article-page">
+  <script>
 
-  <a class="back" href="index.html">
-    ← Back to Home
-  </a>
+    document.getElementById("date").textContent =
+      new Date().toLocaleDateString(
+        "en-US",
+        {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        }
+      );
 
-  <div id="article">
-
-    <p>Loading article...</p>
-
-  </div>
-
-</main>
-
-
-<script>
-
-const client = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
+  </script>
 
 
-async function loadArticle() {
-
-  const params = new URLSearchParams(
-    window.location.search
-  );
-
-  const id = params.get("id");
-
-  if (!id) {
-
-    document.getElementById("article").innerHTML =
-      "<h1>Article not found</h1>";
-
-    return;
-  }
-
-
-  const { data, error } = await client
-    .from("news")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-
-  if (error || !data) {
-
-    document.getElementById("article").innerHTML =
-      "<h1>Article not found</h1>";
-
-    console.error(error);
-
-    return;
-  }
-
-
-  const image = data.image_url
-    ? `<img src="${data.image_url}" alt="${escapeHtml(data.title)}">`
-    : `<div class="article-cover">ONN TV</div>`;
-
-
-  document.getElementById("article").innerHTML = `
-
-    <span class="category">
-      ${escapeHtml(data.category || "NEWS")}
-    </span>
-
-    <h1>
-      ${escapeHtml(data.title)}
-    </h1>
-
-    <div class="article-meta">
-      ${formatDate(data.created_at)}
-      •
-      ${escapeHtml(data.author || "ONN TV News Desk")}
-    </div>
-
-    <div class="article-cover">
-      ${image}
-    </div>
-
-    <div class="article-text">
-
-      ${
-        data.excerpt
-        ? `<p><strong>${escapeHtml(data.excerpt)}</strong></p>`
-        : ""
-      }
-
-      <p>
-        ${escapeHtml(data.content || "").replace(/\n/g, "<br>")}
-      </p>
-
-    </div>
-
-  `;
-}
-
-
-function formatDate(date) {
-
-  return new Date(date).toLocaleString();
-
-}
-
-
-function escapeHtml(value) {
-
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-
-}
-
-
-loadArticle();
-
-</script>
+  <script src="article.js?v=11"></script>
 
 </body>
+
 </html>
