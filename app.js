@@ -14,49 +14,70 @@ async function loadNews() {
     return;
   }
 
-  if (!data || data.length === 0) return;
+  if (!data || data.length === 0) {
+    return;
+  }
 
+  // Latest News
   const latestNews = document.getElementById("latestNews");
 
-  latestNews.innerHTML = data.slice(0, 5).map((news, index) => `
-    <article class="mini-card">
-      <div class="mini-thumb">
-        ${String(index + 1).padStart(2, "0")}
-      </div>
+  if (latestNews) {
+    latestNews.innerHTML = data.slice(0, 5).map((news, index) => {
 
-      <div>
-        <span>${escapeHtml(news.category || "News")}</span>
+      const image = news.image_url
+        ? `<img src="${news.image_url}" alt="${escapeHtml(news.title)}">`
+        : `<span>${String(index + 1).padStart(2, "0")}</span>`;
 
-        <h3>
-          ${escapeHtml(news.title)}
-        </h3>
+      return `
+        <article class="mini-card">
 
-        <small>
-          ${formatDate(news.created_at)}
-        </small>
-      </div>
-    </article>
-  `).join("");
+          <div class="mini-thumb">
+            ${image}
+          </div>
 
+          <div>
+            <span>${escapeHtml(news.category || "News")}</span>
+
+            <h3>
+              ${escapeHtml(news.title)}
+            </h3>
+
+            <small>
+              ${formatDate(news.created_at)}
+            </small>
+          </div>
+
+        </article>
+      `;
+
+    }).join("");
+  }
+
+  // Top Story
   updateHero(data[0]);
 }
 
 
 function updateHero(news) {
+
   const hero = document.querySelector(".hero-card");
 
-  if (!hero || !news) return;
+  if (!hero || !news) {
+    return;
+  }
 
   const image = news.image_url
     ? `<img src="${news.image_url}" alt="${escapeHtml(news.title)}">`
     : `<span>ONN TV</span>`;
 
   hero.innerHTML = `
+
     <div class="hero-image">
       ${image}
     </div>
 
     <div class="hero-content">
+
       <span class="category">
         ${escapeHtml(news.category || "TOP STORY")}
       </span>
@@ -72,23 +93,29 @@ function updateHero(news) {
       <a class="read-more" href="article.html?id=${news.id}">
         Read Full Story →
       </a>
+
     </div>
+
   `;
 }
 
 
 function formatDate(date) {
+
   return new Date(date).toLocaleString();
+
 }
 
 
 function escapeHtml(value) {
+
   return String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+
 }
 
 
