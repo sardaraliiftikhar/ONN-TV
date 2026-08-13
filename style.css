@@ -885,3 +885,174 @@ img {
 .footer-menu a[href="admin.html"]:hover {
   background: #a00000 !important;
 }
+/* =========================================
+   ONN TV ADMIN NEWS MANAGEMENT
+========================================= */
+
+.admin-news-area {
+  padding: 0 35px 35px;
+}
+
+.admin-news-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border-top: 1px solid #ddd;
+  padding-top: 25px;
+  margin-bottom: 20px;
+}
+
+.admin-news-title h2 {
+  margin: 0;
+  font-size: 23px;
+  color: #111;
+}
+
+.refresh-button {
+  border: 0;
+  background: #111;
+  color: white;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+}
+
+.refresh-button:hover {
+  background: #d00000;
+}
+
+.admin-news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-news-card {
+  display: flex;
+  direction: rtl;
+  gap: 18px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.05);
+}
+
+.admin-news-image {
+  width: 180px;
+  min-width: 180px;
+  height: 120px;
+  overflow: hidden;
+  background: #111;
+}
+
+.admin-news-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-no-image {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.admin-news-info {
+  flex: 1;
+}
+
+.admin-news-category {
+  display: inline-block;
+  color: #d00000;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.admin-news-info h3 {
+  margin: 3px 0 8px;
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.admin-news-info p {
+  margin: 0 0 7px;
+  color: #666;
+  line-height: 1.7;
+}
+
+.admin-news-info small {
+  color: #888;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.edit-button,
+.delete-button {
+  border: 0;
+  padding: 9px 16px;
+  cursor: pointer;
+  color: white;
+  font-family: inherit;
+  font-weight: 700;
+}
+
+.edit-button {
+  background: #1769aa;
+}
+
+.edit-button:hover {
+  background: #0d4f83;
+}
+
+.delete-button {
+  background: #d00000;
+}
+
+.delete-button:hover {
+  background: #a00000;
+}
+
+
+/* Mobile */
+
+@media (max-width: 650px) {
+
+  .admin-news-area {
+    padding: 0 18px 25px;
+  }
+
+  .admin-news-title {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-news-card {
+    flex-direction: column;
+  }
+
+  .admin-news-image {
+    width: 100%;
+    height: 190px;
+  }
+
+  .admin-actions {
+    width: 100%;
+  }
+
+  .edit-button,
+  .delete-button {
+    flex: 1;
+  }
+
+}
