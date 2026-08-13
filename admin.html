@@ -1,93 +1,511 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONN TV | Admin Panel</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
+    <title>ONN TV — Admin Panel</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: #f3f4f6;
+        }
+
+        .admin-page {
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            background: #111;
+            color: white;
+            padding: 18px 0;
+        }
+
+        .admin-header-inner {
+            width: 94%;
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-logo {
+            font-size: 25px;
+            font-weight: 900;
+            direction: ltr;
+        }
+
+        .admin-logo span {
+            background: #e00000;
+            padding: 4px 9px;
+            border-radius: 5px;
+        }
+
+        .admin-container {
+            width: 94%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .login-box,
+        .dashboard {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,.07);
+        }
+
+        .login-box {
+            max-width: 450px;
+            margin: 70px auto;
+        }
+
+        .login-box h1,
+        .dashboard h1 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .admin-button {
+            border: none;
+            background: #e00000;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .admin-button:hover {
+            background: #c90000;
+        }
+
+        .logout-button {
+            background: #333;
+        }
+
+        .admin-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .admin-message.show {
+            display: block;
+        }
+
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .admin-card {
+            background: #fafafa;
+            border: 1px solid #eee;
+            padding: 22px;
+            border-radius: 10px;
+        }
+
+        .admin-card h2 {
+            margin-bottom: 10px;
+        }
+
+        .private-note {
+            background: #fff4f4;
+            border-right: 4px solid #e00000;
+            padding: 14px;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        @media(max-width:700px) {
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <header class="header">
-    <div class="container header-inner">
-      <a class="logo" href="index.html"><span>ONN</span> TV</a>
-      <strong>ADMIN PANEL</strong>
-    </div>
-  </header>
+<div class="admin-page">
 
-  <main class="container article-page">
+    <header class="admin-header">
 
-    <section id="loginBox">
-      <span class="category">ONN TV ADMIN</span>
-      <h1>Admin Login</h1>
+        <div class="admin-header-inner">
 
-      <form id="loginForm">
-        <input id="email" type="email" placeholder="Admin Email" required>
-        <input id="password" type="password" placeholder="Password" required>
+            <div class="admin-logo">
+                <span>ONN</span> TV — ADMIN
+            </div>
 
-        <button type="submit" class="admin-btn">Login</button>
+            <a href="index.html"
+               style="color:white;text-decoration:none;">
+                ← ویب سائٹ
+            </a>
 
-        <p id="loginMessage"></p>
-      </form>
-    </section>
-
-
-    <section id="adminPanel" style="display:none">
-
-      <div class="admin-top">
-        <div>
-          <span class="category">ONN TV</span>
-          <h1>Publish News</h1>
         </div>
 
-        <button id="logoutBtn" class="logout-btn">Logout</button>
-      </div>
+    </header>
 
 
-      <form id="newsForm">
+    <!-- LOGIN -->
 
-        <label>News Title</label>
-        <input id="title" type="text" placeholder="Enter news title" required>
+    <section class="admin-container" id="loginSection">
 
-        <label>Excerpt</label>
-        <textarea id="excerpt" placeholder="Short news summary"></textarea>
+        <div class="login-box">
 
-        <label>Full Article</label>
-        <textarea id="content" rows="10" placeholder="Write complete news article..." required></textarea>
+            <h1>Admin Login</h1>
 
-        <label>Category</label>
-        <select id="category">
-          <option value="Pakistan">Pakistan</option>
-          <option value="World">World</option>
-          <option value="Sports">Sports</option>
-          <option value="Business">Business</option>
-          <option value="Technology">Technology</option>
-          <option value="Entertainment">Entertainment</option>
-        </select>
+            <p style="color:#777;margin-bottom:25px;">
+                صرف ONN TV کے منتظم کے لیے
+            </p>
 
-        <label>Author</label>
-        <input id="author" type="text" value="ONN TV News Desk">
 
-        <label>News Image</label>
-        <input id="image" type="file" accept="image/*">
+            <div class="form-group">
 
-        <button type="submit" class="admin-btn">
-          Publish News
-        </button>
+                <label>
+                    Email
+                </label>
 
-        <p id="status"></p>
+                <input
+                    type="email"
+                    id="adminEmail"
+                    placeholder="Admin Email">
 
-      </form>
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Password">
+
+            </div>
+
+
+            <button
+                class="admin-button"
+                id="loginButton">
+
+                Login
+
+            </button>
+
+
+            <div
+                class="admin-message"
+                id="loginMessage">
+            </div>
+
+        </div>
 
     </section>
 
-  </main>
 
-<script src="admin.js"></script>
+    <!-- DASHBOARD -->
+
+    <section class="admin-container">
+
+        <div class="dashboard" id="dashboard">
+
+            <div class="dashboard-top">
+
+                <div>
+
+                    <h1>
+                        ONN TV Admin Dashboard
+                    </h1>
+
+                    <p style="color:#777;">
+                        News اور Stories کو manage کریں
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="admin-button logout-button"
+                    id="logoutButton">
+
+                    Logout
+
+                </button>
+
+            </div>
+
+
+            <div class="private-note">
+
+                🔐 یہ Admin Panel صرف authenticated administrator
+                کے لیے ہے۔ Public website پر اس dashboard کا
+                کوئی visible link نہیں رکھا جائے گا۔
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+
+                <!-- ADD NEWS -->
+
+                <div class="admin-card">
+
+                    <h2>
+                        📰 نئی خبر
+                    </h2>
+
+                    <p>
+                        نئی news add کرنے کا نظام یہاں ہوگا۔
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="admin-button"
+                        id="addNewsButton">
+
+                        Add News
+
+                    </button>
+
+                </div>
+
+
+                <!-- STORIES -->
+
+                <div class="admin-card">
+
+                    <h2>
+                        📸 Stories
+                    </h2>
+
+                    <p>
+                        Story image، title اور story manage کریں۔
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="admin-button"
+                        id="manageStoriesButton">
+
+                        Manage Stories
+
+                    </button>
+
+                </div>
+
+
+                <!-- EXISTING NEWS -->
+
+                <div class="admin-card">
+
+                    <h2>
+                        📋 News Management
+                    </h2>
+
+                    <p>
+                        موجودہ خبریں edit یا delete کریں۔
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="admin-button"
+                        id="manageNewsButton">
+
+                        Manage News
+
+                    </button>
+
+                </div>
+
+
+                <!-- SETTINGS -->
+
+                <div class="admin-card">
+
+                    <h2>
+                        ⚙️ Settings
+                    </h2>
+
+                    <p>
+                        ONN TV website settings۔
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="admin-button"
+                        id="settingsButton">
+
+                        Settings
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+const loginSection =
+    document.getElementById("loginSection");
+
+const dashboard =
+    document.getElementById("dashboard");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+const loginMessage =
+    document.getElementById("loginMessage");
+
+
+/*
+    IMPORTANT:
+
+    ابھی صرف interface تیار کیا جا رہا ہے۔
+    اصل Supabase Authentication اگلے مرحلے
+    میں موجودہ project کی credentials کے مطابق
+    connect کی جائے گی۔
+*/
+
+
+function showDashboard() {
+
+    loginSection.style.display = "none";
+
+    dashboard.style.display = "block";
+
+}
+
+
+function showLogin() {
+
+    loginSection.style.display = "block";
+
+    dashboard.style.display = "none";
+
+}
+
+
+/*
+    Temporary local session.
+    یہ اصل security نہیں ہے۔
+    اگلے step میں Supabase Auth لگایا جائے گا۔
+*/
+
+loginButton.addEventListener("click", function() {
+
+    const email =
+        document.getElementById("adminEmail").value.trim();
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    if (!email || !password) {
+
+        loginMessage.textContent =
+            "Email اور Password درج کریں۔";
+
+        loginMessage.style.background = "#fff0f0";
+
+        loginMessage.classList.add("show");
+
+        return;
+    }
+
+
+    /*
+       ابھی fake login نہیں کریں گے۔
+       جب Supabase Auth connect ہوگا تب
+       اصل email/password verify ہوگا۔
+    */
+
+    loginMessage.textContent =
+        "Authentication ابھی configure نہیں ہوئی۔ اگلے step میں آپ کے موجودہ Supabase project سے connect کریں گے۔";
+
+    loginMessage.style.background = "#fff8e6";
+
+    loginMessage.classList.add("show");
+
+});
+
+
+logoutButton.addEventListener("click", function() {
+
+    showLogin();
+
+});
+
+
+</script>
 
 </body>
 </html>
