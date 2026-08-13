@@ -1,34 +1,83 @@
-const supabaseClient = window.supabase.createClient(
+const articleClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
 );
 
+const articleBox = document.getElementById("article");
+
+function escapeHTML(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function formatDate(value) {
+
+  if (!value) return "";
+
+  const date = new Date(value);
+
+  if (isNaN(date.getTime())) {
+    return String(value);
+  }
+
+  return date.toLocaleDateString("ur-PK", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+}
+
+function formatContent(text) {
+
+  if (!text) {
+    return `
+      <p>
+        اس خبر کی مکمل تفصیل دستیاب نہیں۔
+      </p>
+    `;
+  }
+
+  return String(text)
+    .split(/\n+/)
+    .filter(p => p.trim())
+    .map(p => `
+      <p>${escapeHTML(p)}</p>
+    `)
+    .join("");
+}
+
 
 async function loadArticle() {
-
-  const articleBox =
-    document.getElementById("article");
-
 
   const params =
     new URLSearchParams(
       window.location.search
     );
 
-
-  const id =
-    params.get("id");
-
+  const id = params.get("id");
 
   if (!id) {
 
     articleBox.innerHTML = `
       <div class="article-error">
-        <h1>Story not found</h1>
-        <p>No news article was selected.</p>
+
+        <h1>
+          خبر دستیاب نہیں
+        </h1>
+
+        <p>
+          کوئی خبر منتخب نہیں کی گئی۔
+        </p>
+
         <a href="index.html">
-          Back to Home
+          ← ہوم پیج پر واپس جائیں
         </a>
+
       </div>
     `;
 
@@ -37,7 +86,7 @@ async function loadArticle() {
 
 
   const { data, error } =
-    await supabaseClient
+    await articleClient
       .from("news")
       .select("*")
       .eq("id", id)
@@ -46,18 +95,26 @@ async function loadArticle() {
 
   if (error || !data) {
 
-    console.error(error);
+    console.error(
+      "ARTICLE ERROR:",
+      error
+    );
 
     articleBox.innerHTML = `
       <div class="article-error">
-        <h1>Story not found</h1>
+
+        <h1>
+          خبر نہیں مل سکی
+        </h1>
+
         <p>
-          This news article could not be loaded.
+          یہ خبر اس وقت دستیاب نہیں ہے۔
         </p>
 
         <a href="index.html">
-          ← Back to Home
+          ← ہوم پیج پر واپس جائیں
         </a>
+
       </div>
     `;
 
@@ -65,136 +122,132 @@ async function loadArticle() {
   }
 
 
-  const imageHTML =
-    data.image_url
+  const title =
+    data.title ||
+    data.headline ||
+    data.name ||
+    "بغیر عنوان خبر";
 
-      ? `
-        <img
-          src="${data.image_url}"
-          alt="${escapeHTML(data.title)}"
-        >
-      `
 
-      : "";
+  const category =
+    data.category ||
+    data.section ||
+    "تازہ خبر";
+
+
+  const image =
+    data.image_url ||
+    data.image ||
+    data.featured_image ||
+    data.featured_image_url ||
+    "";
+
+
+  const excerpt =
+    data.excerpt ||
+    data.description ||
+    data.summary ||
+    "";
+
+
+  const content =
+    data.content ||
+    data.body ||
+    "";
 
 
   articleBox.innerHTML = `
 
-    <div class="article-category">
-      ${escapeHTML(
-        data.category || "NEWS"
-      )}
-    </div>
+    <article class="article">
+
+      <a
+        href="index.html"
+        class="back-button">
+
+        ← ہوم پیج پر واپس جائیں
+
+      </a>
 
 
-    <h1 class="article-title">
-      ${escapeHTML(data.title)}
-    </h1>
+      <div class="article-category">
+
+        ${escapeHTML(category)}
+
+      </div>
 
 
-    <div class="article-date">
-      ${formatDate(data.created_at)}
-    </div>
+      <h1 class="article-title">
+
+        ${escapeHTML(title)}
+
+      </h1>
 
 
-    ${
-      imageHTML
+      <div class="article-date">
 
-        ? `
-          <div class="article-image">
-            ${imageHTML}
-          </div>
-        `
+        ${formatDate(data.created_at)}
 
-        : ""
-    }
+      </div>
 
 
-    ${
-      data.excerpt
+      ${
+        image
+          ? `
+            <div class="article-image">
 
-        ? `
-          <p class="article-excerpt">
-            ${escapeHTML(data.excerpt)}
-          </p>
-        `
+              <img
+                src="${escapeHTML(image)}"
+                alt="${escapeHTML(title)}"
+              >
 
-        : ""
-    }
+            </div>
+          `
+          : ""
+      }
 
 
-    <div class="article-content">
+      ${
+        excerpt
+          ? `
+            <div class="article-excerpt">
 
-      ${formatContent(data.content || data.body || "")}
+              ${escapeHTML(excerpt)}
 
-    </div>
+            </div>
+          `
+          : ""
+      }
+
+
+      <div class="article-content">
+
+        ${formatContent(content)}
+
+      </div>
+
+
+      <div class="article-footer">
+
+        ONN TV — آن لائن نیوز نیٹ ورک
+
+      </div>
+
+
+      <a
+        href="index.html"
+        class="back-button bottom">
+
+        ← مزید خبریں دیکھیں
+
+      </a>
+
+    </article>
 
   `;
 
 
   document.title =
-    `${data.title} | ONN TV`;
-
-}
-
-
-function formatDate(date) {
-
-  if (!date) return "";
-
-  return new Date(date).toLocaleString(
-    "en-US",
-    {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit"
-    }
-  );
-
-}
-
-
-function formatContent(text) {
-
-  if (!text) {
-
-    return `
-      <p>
-        No full story content is available.
-      </p>
-    `;
-
-  }
-
-
-  return String(text)
-    .split(/\n+/)
-    .filter(p => p.trim())
-    .map(
-      p => `<p>${escapeHTML(p)}</p>`
-    )
-    .join("");
-
-}
-
-
-function escapeHTML(value) {
-
-  return String(value)
-
-    .replaceAll("&", "&amp;")
-
-    .replaceAll("<", "&lt;")
-
-    .replaceAll(">", "&gt;")
-
-    .replaceAll('"', "&quot;")
-
-    .replaceAll("'", "&#039;");
-
+    `${title} | ONN TV`;
 }
 
 
