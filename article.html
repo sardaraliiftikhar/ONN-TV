@@ -1,28 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Article | ONN TV</title>
+
   <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="header"><div class="container header-inner">
-    <a class="logo" href="index.html"><span>ONN</span> TV</a>
-    <nav><a href="index.html">Home</a><a href="index.html#pakistan">Pakistan</a><a href="index.html#world">World</a><a href="index.html#sports">Sports</a></nav>
-  </div></header>
-  <main class="container article-page">
-    <a class="back" href="index.html">← Back to Home</a>
-    <span class="category">ONN TV NEWS</span>
-    <h1>ONN TV brings you the latest news, updates and breaking stories.</h1>
-    <div class="article-meta">Published today • ONN TV News Desk</div>
-    <div class="article-cover">ONN TV</div>
-    <div class="article-text">
-      <p>Welcome to ONN TV, your modern online news network. This article page is connected to the same website structure that will later receive live news from Supabase.</p>
-      <p>Once the Supabase connection is added, articles, headlines, categories and images can be managed from the news database instead of editing the website manually.</p>
-      <p>This is the starter article. The next step will connect the website to your Supabase database and the <strong>news-images</strong> storage bucket.</p>
-    </div>
-  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="container header-inner">
+
+    <a class="logo" href="index.html">
+      <span>ONN</span> TV
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="index.html#pakistan">Pakistan</a>
+      <a href="index.html#world">World</a>
+      <a href="index.html#sports">Sports</a>
+      <a href="index.html#business">Business</a>
+      <a href="index.html#technology">Technology</a>
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main class="container article-page">
+
+  <a class="back" href="index.html">
+    ← Back to Home
+  </a>
+
+  <div id="article">
+
+    <p>Loading article...</p>
+
+  </div>
+
+</main>
+
+
+<script>
+
+const client = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+
+async function loadArticle() {
+
+  const params = new URLSearchParams(
+    window.location.search
+  );
+
+  const id = params.get("id");
+
+  if (!id) {
+
+    document.getElementById("article").innerHTML =
+      "<h1>Article not found</h1>";
+
+    return;
+  }
+
+
+  const { data, error } = await client
+    .from("news")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+
+  if (error || !data) {
+
+    document.getElementById("article").innerHTML =
+      "<h1>Article not found</h1>";
+
+    console.error(error);
+
+    return;
+  }
+
+
+  const image = data.image_url
+    ? `<img src="${data.image_url}" alt="${escapeHtml(data.title)}">`
+    : `<div class="article-cover">ONN TV</div>`;
+
+
+  document.getElementById("article").innerHTML = `
+
+    <span class="category">
+      ${escapeHtml(data.category || "NEWS")}
+    </span>
+
+    <h1>
+      ${escapeHtml(data.title)}
+    </h1>
+
+    <div class="article-meta">
+      ${formatDate(data.created_at)}
+      •
+      ${escapeHtml(data.author || "ONN TV News Desk")}
+    </div>
+
+    <div class="article-cover">
+      ${image}
+    </div>
+
+    <div class="article-text">
+
+      ${
+        data.excerpt
+        ? `<p><strong>${escapeHtml(data.excerpt)}</strong></p>`
+        : ""
+      }
+
+      <p>
+        ${escapeHtml(data.content || "").replace(/\n/g, "<br>")}
+      </p>
+
+    </div>
+
+  `;
+}
+
+
+function formatDate(date) {
+
+  return new Date(date).toLocaleString();
+
+}
+
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+loadArticle();
+
+</script>
+
 </body>
 </html>
