@@ -3,127 +3,266 @@ const client = window.supabase.createClient(
   SUPABASE_PUBLISHABLE_KEY
 );
 
-const loginForm = document.getElementById("loginForm");
-const loginBox = document.getElementById("loginBox");
-const adminPanel = document.getElementById("adminPanel");
-const loginMessage = document.getElementById("loginMessage");
-const newsForm = document.getElementById("newsForm");
-const statusBox = document.getElementById("status");
-const logoutBtn = document.getElementById("logoutBtn");
+
+const loginForm =
+  document.getElementById("loginForm");
+
+const loginBox =
+  document.getElementById("loginBox");
+
+const adminPanel =
+  document.getElementById("adminPanel");
+
+const loginMessage =
+  document.getElementById("loginMessage");
+
+const newsForm =
+  document.getElementById("newsForm");
+
+const statusBox =
+  document.getElementById("status");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
+
+
+/* =========================
+   CHECK LOGIN
+========================= */
 
 async function checkLogin() {
-  const { data } = await client.auth.getSession();
+
+  const { data } =
+    await client.auth.getSession();
 
   if (data.session) {
+
     showAdmin();
+
   }
+
 }
+
+
+/* =========================
+   SHOW ADMIN
+========================= */
 
 function showAdmin() {
+
   loginBox.style.display = "none";
+
   adminPanel.style.display = "block";
+
 }
 
-loginForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
 
-  loginMessage.textContent = "Logging in...";
+/* =========================
+   LOGIN
+========================= */
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+loginForm.addEventListener(
+  "submit",
+  async function (e) {
 
-  const { error } = await client.auth.signInWithPassword({
-    email,
-    password
-  });
+    e.preventDefault();
 
-  if (error) {
-    loginMessage.textContent = error.message;
-    return;
-  }
-
-  loginMessage.textContent = "";
-  showAdmin();
-});
+    loginMessage.textContent =
+      "Logging in...";
 
 
-logoutBtn.addEventListener("click", async () => {
-  await client.auth.signOut();
-  location.reload();
-});
+    const email =
+      document.getElementById("email").value.trim();
+
+    const password =
+      document.getElementById("password").value;
 
 
-newsForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    const { error } =
+      await client.auth.signInWithPassword({
 
-  statusBox.textContent = "Publishing news...";
+        email,
+        password
 
-  const title = document.getElementById("title").value;
-  const excerpt = document.getElementById("excerpt").value;
-  const content = document.getElementById("content").value;
-  const category = document.getElementById("category").value;
-  const author = document.getElementById("author").value;
-  const imageFile = document.getElementById("image").files[0];
-
-  let imageUrl = null;
+      });
 
 
-  // Upload image
-  if (imageFile) {
+    if (error) {
 
-    const fileName =
-      Date.now() + "-" +
-      imageFile.name.replace(/[^a-zA-Z0-9.-]/g, "-");
+      loginMessage.textContent =
+        "Login failed: " + error.message;
 
-    const { error: uploadError } =
-      await client.storage
-        .from("news-images")
-        .upload(fileName, imageFile);
-
-    if (uploadError) {
-      statusBox.textContent =
-        "Image upload error: " + uploadError.message;
       return;
+
     }
 
 
-    const { data: publicData } =
-      client.storage
-        .from("news-images")
-        .getPublicUrl(fileName);
+    loginMessage.textContent = "";
 
-    imageUrl = publicData.publicUrl;
+    showAdmin();
+
   }
+);
 
 
-  // Save news
-  const { error } = await client
-    .from("news")
-    .insert({
-      title,
-      excerpt,
-      content,
-      image_url: imageUrl,
-      category,
-      author
-    });
+/* =========================
+   LOGOUT
+========================= */
+
+logoutBtn.addEventListener(
+  "click",
+  async function () {
+
+    await client.auth.signOut();
+
+    window.location.reload();
+
+  }
+);
 
 
-  if (error) {
+/* =========================
+   PUBLISH NEWS
+========================= */
+
+newsForm.addEventListener(
+  "submit",
+  async function (e) {
+
+    e.preventDefault();
+
+
     statusBox.textContent =
-      "News publish error: " + error.message;
-    return;
+      "خبر شائع کی جا رہی ہے...";
+
+
+    const title =
+      document.getElementById("title").value.trim();
+
+
+    const excerpt =
+      document.getElementById("excerpt").value.trim();
+
+
+    const content =
+      document.getElementById("content").value.trim();
+
+
+    const category =
+      document.getElementById("category").value;
+
+
+    const author =
+      document.getElementById("author").value.trim();
+
+
+    const imageFile =
+      document.getElementById("image").files[0];
+
+
+    let imageUrl = null;
+
+
+    /* =========================
+       IMAGE UPLOAD
+    ========================= */
+
+    if (imageFile) {
+
+      const fileName =
+        Date.now() +
+        "-" +
+        imageFile.name
+          .replace(/[^a-zA-Z0-9.-]/g, "-");
+
+
+      const { error: uploadError } =
+        await client.storage
+          .from("news-images")
+          .upload(
+            fileName,
+            imageFile
+          );
+
+
+      if (uploadError) {
+
+        statusBox.textContent =
+          "تصویر upload نہیں ہوئی: " +
+          uploadError.message;
+
+        return;
+
+      }
+
+
+      const { data: publicData } =
+        client.storage
+          .from("news-images")
+          .getPublicUrl(fileName);
+
+
+      imageUrl =
+        publicData.publicUrl;
+
+    }
+
+
+    /* =========================
+       SAVE NEWS
+    ========================= */
+
+    const { error } =
+      await client
+        .from("news")
+        .insert({
+
+          title: title,
+
+          excerpt: excerpt,
+
+          content: content,
+
+          image_url: imageUrl,
+
+          category: category,
+
+          author: author
+
+        });
+
+
+    if (error) {
+
+      statusBox.textContent =
+        "خبر publish نہیں ہوئی: " +
+        error.message;
+
+      return;
+
+    }
+
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    statusBox.textContent =
+      "✅ خبر کامیابی سے شائع ہو گئی!";
+
+
+    newsForm.reset();
+
+
+    document.getElementById("author").value =
+      "ONN TV News Desk";
+
   }
+);
 
 
-  statusBox.textContent =
-    "✅ News published successfully!";
-
-  newsForm.reset();
-
-  document.getElementById("author").value =
-    "ONN TV News Desk";
-});
-
+/* =========================
+   START
+========================= */
 
 checkLogin();
