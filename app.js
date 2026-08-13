@@ -10,61 +10,116 @@ async function loadNews() {
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error(error);
+    console.error("Supabase error:", error);
     return;
   }
 
-  if (!data || data.length === 0) return;
+  if (!data || data.length === 0) {
+    return;
+  }
+
+  // =========================
+  // LATEST NEWS
+  // =========================
 
   const latestNews = document.getElementById("latestNews");
 
-  latestNews.innerHTML = data.slice(0, 5).map((news, index) => `
-    <article class="mini-card">
+  if (latestNews) {
+    latestNews.innerHTML = data.slice(0, 5).map((news, index) => {
 
-      <div class="mini-thumb">
-        ${
-          news.image_url
-          ? `<img src="${news.image_url}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;" alt="">`
-          : `<span>${index + 1}</span>`
-        }
-      </div>
+      const thumbnail = news.image_url
+        ? `<img src="${news.image_url}" alt="${escapeHtml(news.title)}">`
+        : `<span>${String(index + 1).padStart(2, "0")}</span>`;
 
-      <div>
-        <span>${news.category || "News"}</span>
-        <h3>${news.title}</h3>
-        <small>${new Date(news.created_at).toLocaleString()}</small>
-      </div>
+      return `
+        <a href="article.html?id=${news.id}" class="mini-card">
 
-    </article>
-  `).join("");
+          <div class="mini-thumb">
+            ${thumbnail}
+          </div>
+
+          <div>
+            <span>${escapeHtml(news.category || "News")}</span>
+
+            <h3>
+              ${escapeHtml(news.title)}
+            </h3>
+
+            <small>
+              ${formatDate(news.created_at)}
+            </small>
+          </div>
+
+        </a>
+      `;
+    }).join("");
+  }
+
+
+  // =========================
+  // HERO / TOP STORY
+  // =========================
 
   const hero = document.querySelector(".hero-card");
 
-  if (hero) {
+  if (hero && data[0]) {
+
+    const news = data[0];
+
+    const heroImage = news.image_url
+      ? `<img src="${news.image_url}" alt="${escapeHtml(news.title)}">`
+      : `<span>ONN TV</span>`;
+
     hero.innerHTML = `
       <div class="hero-image">
-        ${
-          data[0].image_url
-          ? `<img src="${data[0].image_url}" style="width:100%;height:100%;object-fit:cover;" alt="">`
-          : `<span>ONN TV</span>`
-        }
+        ${heroImage}
       </div>
 
       <div class="hero-content">
+
         <span class="category">
-          ${data[0].category || "TOP STORY"}
+          ${escapeHtml(news.category || "TOP STORY")}
         </span>
 
-        <h1>${data[0].title}</h1>
+        <h1>
+          ${escapeHtml(news.title)}
+        </h1>
 
-        <p>${data[0].excerpt || ""}</p>
+        <p>
+          ${escapeHtml(news.excerpt || "")}
+        </p>
 
-        <a class="read-more" href="article.html?id=${data[0].id}">
+        <a class="read-more" href="article.html?id=${news.id}">
           Read Full Story →
         </a>
+
       </div>
     `;
   }
 }
+
+
+// =========================
+// DATE
+// =========================
+
+function formatDate(date) {
+  return new Date(date).toLocaleString();
+}
+
+
+// =========================
+// SECURITY
+// =========================
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
 
 loadNews();
