@@ -726,3 +726,4 @@ function escapeJS(value) {
 ========================= */
 
 checkLogin();
+console.log("ONN ADMIN JS LOADED");
