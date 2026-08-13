@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ONN TV - Online News Network">
+
   <title>ONN TV | Online News Network</title>
-  <link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head>
+
+  <link rel="stylesheet" href="style.css?v=3">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+</head>
+
 <body>
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <span>Thursday, August 13, 2026</span>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container">
+      <span id="todayDate"></span>
       <span>ONN TV • Online News Network</span>
     </div>
   </div>
 
+
+  <!-- HEADER -->
   <header class="header">
+
     <div class="container header-inner">
-      <a class="logo" href="index.html"><span>ONN</span> TV</a>
-      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
-      <nav id="mainNav">
-        <a class="active" href="index.html">Home</a>
+
+      <a href="index.html" class="logo">
+        <span>ONN</span> TV
+      </a>
+
+      <nav>
+        <a href="index.html">Home</a>
         <a href="#latest">Latest</a>
         <a href="#pakistan">Pakistan</a>
         <a href="#world">World</a>
@@ -28,95 +42,111 @@
         <a href="#business">Business</a>
         <a href="#technology">Technology</a>
       </nav>
-      <button class="search-btn" id="searchBtn" aria-label="Search">⌕</button>
+
     </div>
+
   </header>
 
-  <div class="breaking">
+
+  <!-- BREAKING NEWS -->
+  <div class="breaking-bar">
+
     <div class="container breaking-inner">
-      <strong>BREAKING</strong>
-      <div class="ticker" id="ticker">Welcome to ONN TV — Online News Network</div>
+
+      <span class="breaking-label">
+        BREAKING
+      </span>
+
+      <span>
+        Welcome to ONN TV — Online News Network
+      </span>
+
     </div>
+
   </div>
 
+
+  <!-- MAIN -->
   <main class="container">
-    <section class="hero-grid" id="latest">
-      <article class="hero-card">
-        <div class="hero-image"><span>ONN TV</span></div>
+
+    <div class="news-layout">
+
+
+      <!-- HERO -->
+      <section class="hero-card">
+
+        <div class="hero-image">
+          <span>ONN TV</span>
+        </div>
+
         <div class="hero-content">
-          <span class="category">TOP STORY</span>
-          <h1>ONN TV brings you the latest news, updates and breaking stories.</h1>
-          <p>Pakistan, world, sports, business and technology — all in one modern news platform.</p>
-          <a class="read-more" href="article.html?id=1">Read Full Story →</a>
-        </div>
-      </article>
 
-      <aside class="side-news">
-        <div class="section-heading"><h2>Latest News</h2><span>Live</span></div>
-        <div id="latestNews">
-          <article class="mini-card"><div class="mini-thumb">01</div><div><span>Pakistan</span><h3>Latest national developments and important updates</h3><small>Just now</small></div></article>
-          <article class="mini-card"><div class="mini-thumb">02</div><div><span>World</span><h3>Major international stories making headlines</h3><small>10 min ago</small></div></article>
-          <article class="mini-card"><div class="mini-thumb">03</div><div><span>Sports</span><h3>Latest scores, matches and sports updates</h3><small>25 min ago</small></div></article>
+          <span class="category">
+            TOP STORY
+          </span>
+
+          <h1>
+            Latest News
+          </h1>
+
+          <p>
+            Get the latest news and updates from ONN TV.
+          </p>
+
+          <a href="#" class="read-more">
+            Read Full Story →
+          </a>
+
         </div>
+
+      </section>
+
+
+      <!-- LATEST NEWS -->
+      <aside class="latest-box" id="latest">
+
+        <div class="latest-header">
+
+          <h2>
+            Latest News
+          </h2>
+
+          <span class="latest-live">
+            Live
+          </span>
+
+        </div>
+
+        <div id="latestNews"></div>
+
       </aside>
-    </section>
 
-    <section class="section" id="pakistan">
-      <div class="section-heading"><h2>Pakistan</h2><a href="#">View All →</a></div>
-      <div class="news-grid" id="pakistanGrid">
-        <article class="news-card"><div class="news-image">PAKISTAN</div><div class="news-body"><span>Pakistan</span><h3>National news and important developments</h3><p>Stay updated with the latest stories from across Pakistan.</p></div></article>
-        <article class="news-card"><div class="news-image">UPDATE</div><div class="news-body"><span>Pakistan</span><h3>Latest updates from cities and provinces</h3><p>Important developments, statements and breaking updates.</p></div></article>
-        <article class="news-card"><div class="news-image">NEWS</div><div class="news-body"><span>Pakistan</span><h3>Top headlines you need to know today</h3><p>ONN TV keeps you informed with verified news.</p></div></article>
-      </div>
-    </section>
 
-    <section class="section" id="world">
-      <div class="section-heading"><h2>World</h2><a href="#">View All →</a></div>
-      <div class="news-grid">
-        <article class="news-card"><div class="news-image">WORLD</div><div class="news-body"><span>World</span><h3>International news and global developments</h3><p>Major stories from around the world.</p></div></article>
-        <article class="news-card"><div class="news-image">GLOBAL</div><div class="news-body"><span>World</span><h3>Global events shaping today's headlines</h3><p>News and analysis from across the globe.</p></div></article>
-        <article class="news-card"><div class="news-image">LIVE</div><div class="news-body"><span>World</span><h3>Breaking international updates</h3><p>Follow the latest developments as they happen.</p></div></article>
-      </div>
-    </section>
+    </div>
 
-    <section class="section" id="sports">
-      <div class="section-heading"><h2>Sports</h2><a href="#">View All →</a></div>
-      <div class="news-grid">
-        <article class="news-card"><div class="news-image">SPORTS</div><div class="news-body"><span>Sports</span><h3>Latest sports news, scores and match updates</h3><p>Cricket, football and more from the world of sport.</p></div></article>
-        <article class="news-card"><div class="news-image">CRICKET</div><div class="news-body"><span>Cricket</span><h3>Cricket headlines and match coverage</h3><p>Get the latest cricket updates on ONN TV.</p></div></article>
-        <article class="news-card"><div class="news-image">LIVE</div><div class="news-body"><span>Sports</span><h3>Today's biggest sporting stories</h3><p>Scores, results and breaking sports news.</p></div></article>
-      </div>
-    </section>
-
-    <section class="section" id="business">
-      <div class="section-heading"><h2>Business</h2><a href="#">View All →</a></div>
-      <div class="news-grid">
-        <article class="news-card"><div class="news-image">BUSINESS</div><div class="news-body"><span>Business</span><h3>Markets, economy and business updates</h3><p>Key financial and economic developments.</p></div></article>
-        <article class="news-card"><div class="news-image">ECONOMY</div><div class="news-body"><span>Economy</span><h3>Economy and market headlines</h3><p>Stay informed about the business world.</p></div></article>
-        <article class="news-card"><div class="news-image">MARKET</div><div class="news-body"><span>Markets</span><h3>Important market movements and updates</h3><p>Business news from Pakistan and beyond.</p></div></article>
-      </div>
-    </section>
-
-    <section class="section" id="technology">
-      <div class="section-heading"><h2>Technology</h2><a href="#">View All →</a></div>
-      <div class="news-grid">
-        <article class="news-card"><div class="news-image">TECH</div><div class="news-body"><span>Technology</span><h3>Technology, AI and digital world updates</h3><p>The latest stories from the tech industry.</p></div></article>
-        <article class="news-card"><div class="news-image">AI</div><div class="news-body"><span>AI</span><h3>Artificial intelligence and innovation</h3><p>Discover the newest developments in AI.</p></div></article>
-        <article class="news-card"><div class="news-image">DIGITAL</div><div class="news-body"><span>Technology</span><h3>Digital trends changing the world</h3><p>Technology news and useful insights.</p></div></article>
-      </div>
-    </section>
   </main>
 
-  <footer>
-    <div class="container footer-grid">
-      <div><a class="logo" href="index.html"><span>ONN</span> TV</a><p>Online News Network — fast, modern and informative.</p></div>
-      <div><h3>Sections</h3><a href="#pakistan">Pakistan</a><a href="#world">World</a><a href="#sports">Sports</a><a href="#business">Business</a></div>
-      <div><h3>About</h3><a href="#">About ONN TV</a><a href="#">Contact</a><a href="#">Privacy Policy</a></div>
-    </div>
-    <div class="copyright">© 2026 ONN TV. All rights reserved.</div>
-  </footer>
 
-  <script src="config.js"></script>
-  <script src="app.js"></script>
+  <script>
+
+    const dateElement =
+      document.getElementById("todayDate");
+
+    dateElement.textContent =
+      new Date().toLocaleDateString(
+        "en-US",
+        {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        }
+      );
+
+  </script>
+
+
+  <script src="app.js?v=3"></script>
+
 </body>
 </html>
