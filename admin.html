@@ -2,378 +2,291 @@
 <html lang="ur" dir="rtl">
 
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>ایڈمن پینل | ONN TV</title>
+  <title>ONN TV — ایڈمن پینل</title>
 
   <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
+<header class="header">
+  <div class="container header-content">
 
-  <!-- HEADER -->
+    <a href="index.html" class="logo">
+      <span class="logo-onn">ONN</span>
+      <span class="logo-tv">TV</span>
+    </a>
 
-  <header class="header">
+    <div class="header-date">
+      ایڈمن پینل
+    </div>
 
-    <div class="container header-content">
+  </div>
+</header>
 
-      <a
-        href="index.html"
-        class="logo">
 
-        <span class="logo-onn">
-          ONN
-        </span>
+<main>
 
-        <span class="logo-tv">
-          TV
-        </span>
+  <div class="container">
 
+    <!-- LOGIN -->
+
+    <div class="admin-box" id="loginBox">
+
+      <div class="admin-header">
+
+        <span class="admin-icon">🔐</span>
+
+        <h1>
+          ONN TV ایڈمن
+        </h1>
+
+        <p>
+          News Management System
+        </p>
+
+      </div>
+
+      <form id="loginForm">
+
+        <label>
+          ای میل
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Admin Email"
+          required
+        >
+
+        <label>
+          پاس ورڈ
+        </label>
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          required
+        >
+
+        <button
+          type="submit"
+          class="admin-button">
+
+          لاگ اِن
+
+        </button>
+
+        <div
+          class="admin-message"
+          id="loginMessage">
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <!-- ADMIN PANEL -->
+
+    <div
+      class="admin-box"
+      id="adminPanel"
+      style="display:none;">
+
+      <div class="admin-header">
+
+        <span class="admin-icon">📰</span>
+
+        <h1>
+          ONN TV News Desk
+        </h1>
+
+        <p>
+          خبر شائع کریں اور اپنی خبریں manage کریں
+        </p>
+
+      </div>
+
+
+      <!-- PUBLISH NEWS -->
+
+      <form id="newsForm">
+
+        <label>
+          خبر کا عنوان
+        </label>
+
+        <input
+          type="text"
+          id="title"
+          placeholder="خبر کا مکمل عنوان"
+          required
+        >
+
+
+        <label>
+          کیٹیگری
+        </label>
+
+        <select id="category" required>
+
+          <option value="">
+            کیٹیگری منتخب کریں
+          </option>
+
+          <option value="پاکستان">
+            پاکستان
+          </option>
+
+          <option value="دنیا">
+            دنیا
+          </option>
+
+          <option value="کھیل">
+            کھیل
+          </option>
+
+          <option value="کاروبار">
+            کاروبار
+          </option>
+
+          <option value="ٹیکنالوجی">
+            ٹیکنالوجی
+          </option>
+
+          <option value="دیگر">
+            دیگر
+          </option>
+
+        </select>
+
+
+        <label>
+          مختصر خبر
+        </label>
+
+        <textarea
+          id="excerpt"
+          rows="4"
+          placeholder="خبر کا مختصر خلاصہ..."
+          required></textarea>
+
+
+        <label>
+          مکمل خبر
+        </label>
+
+        <textarea
+          id="content"
+          rows="12"
+          placeholder="خبر کی مکمل تفصیل..."
+          required></textarea>
+
+
+        <label>
+          رپورٹر / مصنف
+        </label>
+
+        <input
+          type="text"
+          id="author"
+          value="ONN TV News Desk"
+        >
+
+
+        <label>
+          خبر کی تصویر
+        </label>
+
+        <input
+          type="file"
+          id="image"
+          accept="image/*"
+        >
+
+
+        <button
+          type="submit"
+          class="admin-button">
+
+          📰 خبر شائع کریں
+
+        </button>
+
+
+        <div
+          class="admin-message"
+          id="status">
+        </div>
+
+      </form>
+
+
+      <div style="padding: 0 35px 35px;">
+
+        <button
+          id="logoutBtn"
+          class="logout-button">
+
+          Logout
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="container footer-content">
+
+    <div>
+
+      <div class="footer-logo">
+        <span>ONN</span> TV
+      </div>
+
+      <p>
+        ONN TV News Management
+      </p>
+
+    </div>
+
+    <div class="footer-menu">
+
+      <a href="index.html">
+        🏠 ویب سائٹ
       </a>
 
-
-      <div class="header-date">
-
-        ONN TV نیوز روم
-
-      </div>
-
     </div>
 
-  </header>
+  </div>
 
+  <div class="copyright">
+    © 2026 ONN TV — Admin Panel
+  </div>
 
-  <!-- NAVIGATION -->
+</footer>
 
-  <nav class="navbar">
 
-    <div class="container nav-content">
+<!-- Supabase -->
 
-      <div class="nav-links">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        <a href="index.html">
-          ہوم
-        </a>
+<script src="config.js"></script>
 
-        <a href="index.html#latest">
-          تازہ ترین
-        </a>
-
-        <a href="index.html#pakistan">
-          پاکستان
-        </a>
-
-        <a href="index.html#world">
-          دنیا
-        </a>
-
-        <a href="index.html#sports">
-          کھیل
-        </a>
-
-      </div>
-
-    </div>
-
-  </nav>
-
-
-  <!-- ADMIN AREA -->
-
-  <main>
-
-    <div class="container">
-
-
-      <!-- LOGIN -->
-
-      <section
-        id="loginBox"
-        class="admin-box">
-
-        <div class="admin-header">
-
-          <span class="admin-icon">
-            🔐
-          </span>
-
-          <h1>
-            ONN TV ایڈمن لاگ اِن
-          </h1>
-
-          <p>
-            صرف مجاز صارفین کے لیے
-          </p>
-
-        </div>
-
-
-        <form id="loginForm">
-
-
-          <label for="email">
-            ای میل
-          </label>
-
-          <input
-            type="email"
-            id="email"
-            placeholder="اپنی ای میل درج کریں"
-            required
-          >
-
-
-          <label for="password">
-            پاس ورڈ
-          </label>
-
-          <input
-            type="password"
-            id="password"
-            placeholder="اپنا پاس ورڈ درج کریں"
-            required
-          >
-
-
-          <button
-            type="submit"
-            class="admin-button">
-
-            لاگ اِن کریں
-
-          </button>
-
-
-          <div
-            id="loginMessage"
-            class="admin-message">
-          </div>
-
-        </form>
-
-      </section>
-
-
-      <!-- ADMIN PANEL -->
-
-      <section
-        id="adminPanel"
-        class="admin-box"
-        style="display:none;">
-
-
-        <div class="admin-header">
-
-          <span class="admin-icon">
-            📰
-          </span>
-
-          <h1>
-            ONN TV نیوز ڈیسک
-          </h1>
-
-          <p>
-            نئی خبر شائع کریں
-          </p>
-
-        </div>
-
-
-        <form id="newsForm">
-
-
-          <label for="title">
-            خبر کا عنوان
-          </label>
-
-          <input
-            type="text"
-            id="title"
-            placeholder="خبر کا مکمل عنوان"
-            required
-          >
-
-
-          <label for="category">
-            شعبہ / کیٹیگری
-          </label>
-
-          <select
-            id="category"
-            required>
-
-            <option value="">
-              کیٹیگری منتخب کریں
-            </option>
-
-            <option value="پاکستان">
-              پاکستان
-            </option>
-
-            <option value="دنیا">
-              دنیا
-            </option>
-
-            <option value="کھیل">
-              کھیل
-            </option>
-
-            <option value="کاروبار">
-              کاروبار
-            </option>
-
-            <option value="ٹیکنالوجی">
-              ٹیکنالوجی
-            </option>
-
-            <option value="اہم خبر">
-              اہم خبر
-            </option>
-
-          </select>
-
-
-          <label for="excerpt">
-            مختصر خبر
-          </label>
-
-          <textarea
-            id="excerpt"
-            rows="4"
-            placeholder="خبر کا مختصر خلاصہ لکھیں..."
-            required>
-          </textarea>
-
-
-          <label for="content">
-            مکمل خبر
-          </label>
-
-          <textarea
-            id="content"
-            rows="12"
-            placeholder="یہاں خبر کی مکمل تفصیل لکھیں..."
-            required>
-          </textarea>
-
-
-          <label for="author">
-            رپورٹر / مصنف
-          </label>
-
-          <input
-            type="text"
-            id="author"
-            value="ONN TV نیوز ڈیسک"
-          >
-
-
-          <label for="image">
-            خبر کی تصویر
-          </label>
-
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-          >
-
-
-          <button
-            type="submit"
-            class="admin-button">
-
-            📰 خبر شائع کریں
-
-          </button>
-
-
-          <button
-            type="button"
-            id="logoutBtn"
-            class="logout-button">
-
-            لاگ آؤٹ
-
-          </button>
-
-
-          <div
-            id="status"
-            class="admin-message">
-          </div>
-
-
-        </form>
-
-      </section>
-
-
-    </div>
-
-  </main>
-
-
-  <!-- FOOTER -->
-
-  <footer class="footer">
-
-    <div class="container footer-content">
-
-      <div>
-
-        <div class="footer-logo">
-
-          <span>
-            ONN
-          </span>
-
-          TV
-
-        </div>
-
-        <p>
-          آن لائن نیوز نیٹ ورک
-        </p>
-
-        <p>
-          نیوز روم — صرف مجاز صارفین کے لیے
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="copyright">
-
-      © 2026 او این این ٹی وی — جملہ حقوق محفوظ ہیں
-
-    </div>
-
-  </footer>
-
-
-  <!-- SUPABASE -->
-
-  <script
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-  </script>
-
-
-  <script src="config.js"></script>
-
-  <script src="admin.js"></script>
-
+<script src="admin.js"></script>
 
 </body>
 
