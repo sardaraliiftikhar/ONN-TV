@@ -1,9 +1,8 @@
 /* ==========================================
-   ONN TV - DYNAMIC NEWS SYSTEM
-   Supabase News Loader
+   ONN TV - LIVE SUPABASE NEWS
 ========================================== */
 
-const client = window.supabase.createClient(
+const onnSupabase = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
 );
@@ -13,8 +12,7 @@ const client = window.supabase.createClient(
    HELPERS
 ========================================== */
 
-function escapeHTML(value) {
-
+function esc(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
@@ -23,32 +21,15 @@ function escapeHTML(value) {
     .replaceAll("'", "&#039;");
 }
 
-
-function getTitle(news) {
-
-  return (
-    news.title ||
-    news.headline ||
-    news.name ||
-    "Untitled News"
-  );
-
+function titleOf(news) {
+  return news.title || news.headline || news.name || "بغیر عنوان خبر";
 }
 
-
-function getCategory(news) {
-
-  return (
-    news.category ||
-    news.section ||
-    "News"
-  );
-
+function categoryOf(news) {
+  return news.category || news.section || "تازہ خبر";
 }
 
-
-function getImage(news) {
-
+function imageOf(news) {
   return (
     news.image_url ||
     news.image ||
@@ -58,77 +39,51 @@ function getImage(news) {
     news.photo ||
     ""
   );
-
 }
 
-
-function getDate(news) {
-
-  return (
-    news.created_at ||
-    news.date ||
-    news.published_at ||
-    ""
-  );
-
-}
-
-
-function getExcerpt(news) {
-
+function excerptOf(news) {
   return (
     news.excerpt ||
     news.description ||
     news.summary ||
     ""
   );
-
 }
 
+function dateOf(news) {
+  return news.created_at || news.published_at || news.date || "";
+}
 
 function formatDate(value) {
-
   if (!value) return "";
 
-  const date = new Date(value);
+  const d = new Date(value);
 
-  if (isNaN(date.getTime())) {
+  if (isNaN(d.getTime())) {
     return String(value);
   }
 
-  return date.toLocaleDateString(
-    "ur-PK",
-    {
-      year: "numeric",
-      month: "short",
-      day: "numeric"
-    }
-  );
-
+  return d.toLocaleDateString("ur-PK", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
 }
 
 
 /* ==========================================
-   NEWS CARD
+   CARD
 ========================================== */
 
-function createNewsCard(news) {
+function newsCard(news) {
 
   const id = news.id;
-
-  const title = getTitle(news);
-
-  const category = getCategory(news);
-
-  const image = getImage(news);
-
-  const excerpt = getExcerpt(news);
-
-  const date = getDate(news);
-
+  const title = titleOf(news);
+  const category = categoryOf(news);
+  const image = imageOf(news);
+  const excerpt = excerptOf(news);
 
   return `
-
     <a
       href="article.html?id=${encodeURIComponent(id)}"
       class="news-card"
@@ -136,60 +91,48 @@ function createNewsCard(news) {
 
       ${
         image
-
-        ? `
-          <img
-            src="${escapeHTML(image)}"
-            alt="${escapeHTML(title)}"
-            loading="lazy"
-          >
-        `
-
-        : `
-          <div class="news-placeholder">
-            ONN TV
-          </div>
-        `
+          ? `
+            <img
+              src="${esc(image)}"
+              alt="${esc(title)}"
+              loading="lazy"
+            >
+          `
+          : `
+            <div class="news-placeholder">
+              ONN TV
+            </div>
+          `
       }
-
 
       <div class="news-card-content">
 
         <span class="news-label">
-          ${escapeHTML(category)}
+          ${esc(category)}
         </span>
 
-
         <h3>
-          ${escapeHTML(title)}
+          ${esc(title)}
         </h3>
-
 
         ${
           excerpt
-
-          ? `
-            <p>
-              ${escapeHTML(
-                String(excerpt).substring(0, 120)
-              )}
-            </p>
-          `
-
-          : ""
+            ? `
+              <p>
+                ${esc(String(excerpt).substring(0, 140))}
+              </p>
+            `
+            : ""
         }
 
-
         <small>
-          ${escapeHTML(formatDate(date))}
+          ${esc(formatDate(dateOf(news)))}
         </small>
 
       </div>
 
     </a>
-
   `;
-
 }
 
 
@@ -197,85 +140,64 @@ function createNewsCard(news) {
    HERO
 ========================================== */
 
-function renderHero(news) {
+function showHero(news) {
 
   const hero = document.getElementById("hero");
 
   if (!hero || !news) return;
 
-
-  const title = getTitle(news);
-
-  const category = getCategory(news);
-
-  const image = getImage(news);
-
-  const excerpt = getExcerpt(news);
-
+  const title = titleOf(news);
+  const category = categoryOf(news);
+  const image = imageOf(news);
+  const excerpt = excerptOf(news);
 
   hero.innerHTML = `
-
     ${
       image
-
-      ? `
-        <img
-          src="${escapeHTML(image)}"
-          alt="${escapeHTML(title)}"
-        >
-      `
-
-      : `
-        <div class="hero-placeholder">
-          ONN TV
-        </div>
-      `
+        ? `
+          <img
+            src="${esc(image)}"
+            alt="${esc(title)}"
+          >
+        `
+        : `
+          <div class="hero-placeholder">
+            ONN TV
+          </div>
+        `
     }
-
 
     <div class="hero-overlay">
 
       <span class="news-label">
-        ${escapeHTML(category)}
+        ${esc(category)}
       </span>
 
-
       <h1>
-        ${escapeHTML(title)}
+        ${esc(title)}
       </h1>
-
 
       ${
         excerpt
-
-        ? `
-          <p>
-            ${escapeHTML(
-              String(excerpt).substring(0, 220)
-            )}
-          </p>
-        `
-
-        : ""
+          ? `
+            <p>
+              ${esc(String(excerpt).substring(0, 220))}
+            </p>
+          `
+          : ""
       }
 
-
       <span class="hero-read">
-        مکمل خبر پڑھیں →
+        مکمل خبر پڑھیں ←
       </span>
 
     </div>
-
   `;
 
-
-  hero.onclick = function () {
-
+  hero.onclick = () => {
     window.location.href =
       `article.html?id=${encodeURIComponent(news.id)}`;
-
   };
-
 }
 
 
@@ -283,85 +205,58 @@ function renderHero(news) {
    SIDE NEWS
 ========================================== */
 
-function renderSideNews(news) {
+function showSideNews(news) {
 
-  const box =
-    document.getElementById("sideNews");
+  const box = document.getElementById("sideNews");
 
   if (!box) return;
 
+  const items = news.slice(1, 4);
 
-  const items =
-    news.slice(1, 4);
+  box.innerHTML = items.map(item => {
 
+    const title = titleOf(item);
+    const category = categoryOf(item);
+    const image = imageOf(item);
 
-  if (!items.length) {
+    return `
+      <a
+        href="article.html?id=${encodeURIComponent(item.id)}"
+        class="side-news-card"
+      >
 
-    box.innerHTML = "";
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-    items.map((item) => {
-
-      const title =
-        getTitle(item);
-
-      const category =
-        getCategory(item);
-
-      const image =
-        getImage(item);
-
-
-      return `
-
-        <a
-          href="article.html?id=${encodeURIComponent(item.id)}"
-          class="side-news-card"
-        >
-
-          ${
-            image
-
+        ${
+          image
             ? `
               <img
-                src="${escapeHTML(image)}"
-                alt="${escapeHTML(title)}"
+                src="${esc(image)}"
+                alt="${esc(title)}"
                 loading="lazy"
               >
             `
-
             : `
               <div class="side-placeholder">
                 ONN
               </div>
             `
-          }
+        }
 
+        <div>
 
-          <div>
+          <span class="news-label">
+            ${esc(category)}
+          </span>
 
-            <span class="news-label">
-              ${escapeHTML(category)}
-            </span>
+          <h3>
+            ${esc(title)}
+          </h3>
 
+        </div>
 
-            <h3>
-              ${escapeHTML(title)}
-            </h3>
+      </a>
+    `;
 
-          </div>
-
-        </a>
-
-      `;
-
-    }).join("");
-
+  }).join("");
 }
 
 
@@ -369,322 +264,340 @@ function renderSideNews(news) {
    STORIES
 ========================================== */
 
-function renderStories(news) {
+function showStories(news) {
 
   const box =
     document.getElementById("storiesContainer");
 
   if (!box) return;
 
+  const items = news.slice(0, 8);
 
-  const items =
-    news.slice(0, 8);
+  box.innerHTML = items.map(item => {
 
+    const title = titleOf(item);
+    const image = imageOf(item);
 
-  if (!items.length) {
+    return `
+      <a
+        href="article.html?id=${encodeURIComponent(item.id)}"
+        class="story"
+      >
 
-    box.innerHTML =
-      `<div class="loading">No stories available.</div>`;
+        <div class="story-image">
 
-    return;
-
-  }
-
-
-  box.innerHTML =
-    items.map((item) => {
-
-      const title =
-        getTitle(item);
-
-      const image =
-        getImage(item);
-
-
-      return `
-
-        <a
-          class="story"
-          href="article.html?id=${encodeURIComponent(item.id)}"
-        >
-
-          <div class="story-image">
-
-            ${
-              image
-
+          ${
+            image
               ? `
                 <img
-                  src="${escapeHTML(image)}"
-                  alt="${escapeHTML(title)}"
+                  src="${esc(image)}"
+                  alt="${esc(title)}"
                   loading="lazy"
                 >
               `
-
               : `
                 <div class="story-placeholder">
                   ONN
                 </div>
               `
-            }
+          }
 
-          </div>
+        </div>
 
+        <h3>
+          ${esc(title)}
+        </h3>
 
-          <h3>
-            ${escapeHTML(title)}
-          </h3>
+      </a>
+    `;
 
-        </a>
-
-      `;
-
-    }).join("");
-
+  }).join("");
 }
 
 
 /* ==========================================
-   CATEGORY NEWS
+   CATEGORY
 ========================================== */
 
-function renderCategory(
-  elementId,
-  news,
-  categories
-) {
+function showCategory(id, news, words) {
 
-  const box =
-    document.getElementById(elementId);
+  const box = document.getElementById(id);
 
   if (!box) return;
 
+  const items = news.filter(item => {
 
-  const filtered =
-    news.filter((item) => {
+    const category =
+      categoryOf(item).toLowerCase();
 
-      const category =
-        getCategory(item).toLowerCase();
+    return words.some(word =>
+      category.includes(word)
+    );
 
-      return categories.some(
-        c => category.includes(c)
-      );
+  }).slice(0, 6);
 
-    }).slice(0, 6);
+  if (!items.length) {
 
-
-  if (!filtered.length) {
-
-    box.innerHTML =
-      `<div class="loading">
-        اس category میں ابھی خبر موجود نہیں۔
-      </div>`;
+    box.innerHTML = `
+      <div class="loading">
+        اس زمرے میں ابھی کوئی خبر موجود نہیں۔
+      </div>
+    `;
 
     return;
-
   }
 
-
   box.innerHTML =
-    filtered
-      .map(createNewsCard)
-      .join("");
-
+    items.map(newsCard).join("");
 }
 
 
 /* ==========================================
-   BREAKING NEWS
+   BREAKING
 ========================================== */
 
-function renderBreaking(news) {
+function showBreaking(news) {
 
   const box =
     document.getElementById("breakingText");
 
   if (!box || !news.length) return;
 
-
-  const title =
-    getTitle(news[0]);
-
-
   box.textContent =
-    title;
-
+    titleOf(news[0]);
 }
 
 
 /* ==========================================
-   MAIN LOAD
+   ERROR
+========================================== */
+
+function showError(message) {
+
+  const boxes = [
+    "latestNews",
+    "storiesContainer",
+    "hero"
+  ];
+
+  boxes.forEach(id => {
+
+    const box = document.getElementById(id);
+
+    if (box) {
+
+      box.innerHTML = `
+        <div class="loading">
+
+          <strong>
+            ONN TV News Error
+          </strong>
+
+          <br><br>
+
+          ${esc(message)}
+
+        </div>
+      `;
+    }
+
+  });
+}
+
+
+/* ==========================================
+   LOAD NEWS
 ========================================== */
 
 async function loadNews() {
 
-  const latestBox =
+  console.log("ONN TV: Loading news...");
+
+  const latest =
     document.getElementById("latestNews");
 
+  if (latest) {
 
-  if (latestBox) {
-
-    latestBox.innerHTML =
-      `<div class="loading">
+    latest.innerHTML = `
+      <div class="loading">
         خبریں لوڈ ہو رہی ہیں...
-      </div>`;
+      </div>
+    `;
 
   }
 
 
-  const {
-    data,
-    error
-  } = await client
+  try {
 
-    .from("news")
-
-    .select("*")
-
-    .order(
-      "created_at",
-      {
-        ascending: false
-      }
-    );
+    const result =
+      await onnSupabase
+        .from("news")
+        .select("*")
+        .order("created_at", {
+          ascending: false
+        });
 
 
-  if (error) {
+    const data = result.data;
+    const error = result.error;
 
-    console.error(
-      "ONN TV NEWS ERROR:",
+
+    console.log(
+      "ONN TV Supabase result:",
+      data,
       error
     );
 
 
-    if (latestBox) {
+    if (error) {
 
-      latestBox.innerHTML =
-        `<div class="loading">
-          News could not be loaded.
-        </div>`;
+      console.error(
+        "SUPABASE NEWS ERROR:",
+        error
+      );
+
+      showError(
+        error.message ||
+        "Supabase سے خبریں حاصل نہیں ہو سکیں۔"
+      );
+
+      return;
+    }
+
+
+    if (!data || data.length === 0) {
+
+      showError(
+        "Supabase میں news table خالی ہے یا اس کی rows پڑھنے کی اجازت نہیں ہے۔"
+      );
+
+      return;
+    }
+
+
+    console.log(
+      `ONN TV: ${data.length} news loaded`
+    );
+
+
+    /* HERO */
+
+    showHero(data[0]);
+
+
+    /* SIDE NEWS */
+
+    showSideNews(data);
+
+
+    /* STORIES */
+
+    showStories(data);
+
+
+    /* BREAKING */
+
+    showBreaking(data);
+
+
+    /* LATEST */
+
+    if (latest) {
+
+      latest.innerHTML =
+        data
+          .slice(0, 12)
+          .map(newsCard)
+          .join("");
 
     }
 
-    return;
+
+    /* PAKISTAN */
+
+    showCategory(
+      "pakistanNews",
+      data,
+      [
+        "pakistan",
+        "پاکستان",
+        "national",
+        "قومی"
+      ]
+    );
+
+
+    /* WORLD */
+
+    showCategory(
+      "worldNews",
+      data,
+      [
+        "world",
+        "دنیا",
+        "international",
+        "عالمی"
+      ]
+    );
+
+
+    /* SPORTS */
+
+    showCategory(
+      "sportsNews",
+      data,
+      [
+        "sports",
+        "sport",
+        "کھیل",
+        "کرکٹ",
+        "cricket"
+      ]
+    );
+
+
+    /* BUSINESS */
+
+    showCategory(
+      "businessNews",
+      data,
+      [
+        "business",
+        "کاروبار",
+        "معیشت",
+        "economy"
+      ]
+    );
+
+
+    /* TECHNOLOGY */
+
+    showCategory(
+      "technologyNews",
+      data,
+      [
+        "technology",
+        "tech",
+        "ٹیکنالوجی",
+        "ٹیک"
+      ]
+    );
 
   }
 
+  catch (error) {
 
-  if (!data || data.length === 0) {
+    console.error(
+      "ONN TV unexpected error:",
+      error
+    );
 
-    if (latestBox) {
-
-      latestBox.innerHTML =
-        `<div class="loading">
-          ابھی کوئی خبر موجود نہیں۔
-        </div>`;
-
-    }
-
-    return;
+    showError(
+      error.message ||
+      "Unexpected error occurred."
+    );
 
   }
-
-
-  /* HERO */
-
-  renderHero(data[0]);
-
-
-  /* SIDE */
-
-  renderSideNews(data);
-
-
-  /* STORIES */
-
-  renderStories(data);
-
-
-  /* BREAKING */
-
-  renderBreaking(data);
-
-
-  /* LATEST */
-
-  if (latestBox) {
-
-    latestBox.innerHTML =
-      data
-        .slice(0, 8)
-        .map(createNewsCard)
-        .join("");
-
-  }
-
-
-  /* CATEGORIES */
-
-  renderCategory(
-    "pakistanNews",
-    data,
-    [
-      "pakistan",
-      "پاکستان",
-      "national",
-      "قومی"
-    ]
-  );
-
-
-  renderCategory(
-    "worldNews",
-    data,
-    [
-      "world",
-      "دنیا",
-      "international",
-      "عالمی"
-    ]
-  );
-
-
-  renderCategory(
-    "sportsNews",
-    data,
-    [
-      "sports",
-      "sport",
-      "کھیل",
-      "کرکٹ",
-      "cricket"
-    ]
-  );
-
-
-  renderCategory(
-    "businessNews",
-    data,
-    [
-      "business",
-      "businesses",
-      "کاروبار",
-      "معیشت",
-      "economy"
-    ]
-  );
-
-
-  renderCategory(
-    "technologyNews",
-    data,
-    [
-      "technology",
-      "tech",
-      "ٹیکنالوجی",
-      "ٹیک"
-    ]
-  );
 
 }
 
