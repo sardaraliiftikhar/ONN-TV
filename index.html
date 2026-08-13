@@ -1,191 +1,822 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ur" dir="rtl">
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ONN TV | Online News Network</title>
+  <title>ONN TV - Online News Network</title>
 
-  <link rel="stylesheet" href="style.css?v=10">
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
-
+  <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-
-    <div class="page">
-
-      <div id="date"></div>
-
-      <div>
-        ONN TV • Online News Network
-      </div>
-
-    </div>
-
-  </div>
-
-
   <!-- HEADER -->
   <header class="header">
-
-    <div class="page header-inner">
+    <div class="container header-content">
 
       <a href="index.html" class="logo">
-        <span>ONN</span> TV
+        <span class="logo-onn">ONN</span>
+        <span class="logo-tv">TV</span>
       </a>
 
-
-      <nav class="menu">
-
-        <a href="index.html">Home</a>
-
-        <a href="#latest">Latest</a>
-
-        <a href="#pakistan">Pakistan</a>
-
-        <a href="#world">World</a>
-
-        <a href="#sports">Sports</a>
-
-        <a href="#business">Business</a>
-
-        <a href="#technology">Technology</a>
-
-      </nav>
-
-
-      <div class="search-icon">
-        ⌕
+      <div class="header-date" id="currentDate">
+        آج کی تازہ خبریں
       </div>
 
     </div>
-
   </header>
 
 
-  <!-- BREAKING -->
-  <div class="breaking">
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="container nav-content">
 
-    <div class="page breaking-inner">
+      <button class="menu-button" id="menuButton">
+        ☰
+      </button>
 
-      <strong>BREAKING</strong>
+      <div class="nav-links" id="navLinks">
 
-      <span>
-        Welcome to ONN TV — Online News Network
-      </span>
+        <a href="#home">ہوم</a>
+
+        <a href="#latest">تازہ ترین</a>
+
+        <a href="#pakistan">پاکستان</a>
+
+        <a href="#world">دنیا</a>
+
+        <a href="#sports">کھیل</a>
+
+        <a href="#business">کاروبار</a>
+
+        <a href="#technology">ٹیکنالوجی</a>
+
+      </div>
 
     </div>
-
-  </div>
-
-
-  <!-- CONTENT -->
-  <main class="page main">
+  </nav>
 
 
-    <div class="home-grid">
+  <!-- MAIN -->
+  <main id="home">
+
+    <div class="container">
 
 
-      <!-- ================= HERO ================= -->
+      <!-- BREAKING NEWS -->
+      <section class="breaking-news">
 
-      <section class="hero" id="hero">
+        <div class="breaking-label">
+          بریکنگ نیوز
+        </div>
 
-        <div class="hero-image">
+        <div class="breaking-text">
+          ONN TV — پاکستان اور دنیا کی تازہ ترین خبریں
+        </div>
 
-          <div class="hero-placeholder">
+      </section>
+
+
+
+      <!-- STORIES -->
+      <section class="stories-section">
+
+        <div class="section-heading">
+
+          <h2>
+            آج کی اہم اسٹوریز
+          </h2>
+
+          <span>
             ONN TV
-          </div>
+          </span>
 
         </div>
 
 
-        <div class="hero-info">
+        <div class="stories-container" id="storiesContainer">
 
-          <div class="category">
-            TOP STORY
+          <!-- Story 1 -->
+          <div class="story" onclick="openStory(0)">
+
+            <div class="story-image">
+              <img
+                src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=500&q=80"
+                alt="تازہ خبر">
+            </div>
+
+            <h3>
+              اہم ترین خبر
+            </h3>
+
           </div>
 
 
-          <h1>
-            Latest News
-          </h1>
+          <!-- Story 2 -->
+          <div class="story" onclick="openStory(1)">
+
+            <div class="story-image">
+              <img
+                src="https://images.unsplash.com/photo-1521292270410-a8c4d716d518?auto=format&fit=crop&w=500&q=80"
+                alt="پاکستان">
+            </div>
+
+            <h3>
+              پاکستان کی بڑی خبر
+            </h3>
+
+          </div>
 
 
-          <p>
-            Get the latest news and updates from ONN TV.
-          </p>
+          <!-- Story 3 -->
+          <div class="story" onclick="openStory(2)">
+
+            <div class="story-image">
+              <img
+                src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=500&q=80"
+                alt="دنیا">
+            </div>
+
+            <h3>
+              دنیا کی تازہ خبر
+            </h3>
+
+          </div>
 
 
-          <a href="#" class="read-button">
-            Read Full Story →
-          </a>
+          <!-- Story 4 -->
+          <div class="story" onclick="openStory(3)">
+
+            <div class="story-image">
+              <img
+                src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=500&q=80"
+                alt="کھیل">
+            </div>
+
+            <h3>
+              کھیلوں کی بڑی خبر
+            </h3>
+
+          </div>
+
+
+          <!-- Story 5 -->
+          <div class="story" onclick="openStory(4)">
+
+            <div class="story-image">
+              <img
+                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=500&q=80"
+                alt="کاروبار">
+            </div>
+
+            <h3>
+              کاروباری اپ ڈیٹ
+            </h3>
+
+          </div>
+
 
         </div>
 
       </section>
 
 
-      <!-- ================= LATEST ================= -->
 
-      <aside class="latest" id="latest">
+      <!-- HERO NEWS -->
+      <section class="hero-section" id="latest">
 
-        <div class="latest-title">
+        <article class="hero-news" onclick="openStory(0)">
+
+          <img
+            src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1400&q=85"
+            alt="ONN TV News">
+
+          <div class="hero-overlay">
+
+            <span class="news-label">
+              تازہ ترین
+            </span>
+
+            <h1>
+              پاکستان اور دنیا کی اہم ترین خبریں ایک ہی جگہ
+            </h1>
+
+            <p>
+              ONN TV پر ہر لمحے کی تازہ صورتحال سے باخبر رہیں
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- SIDE NEWS -->
+        <div class="side-news">
+
+          <article class="side-news-card" onclick="openStory(1)">
+
+            <img
+              src="https://images.unsplash.com/photo-1524498250077-390f9e378fc0?auto=format&fit=crop&w=600&q=80"
+              alt="News">
+
+            <div>
+
+              <span class="news-label">
+                پاکستان
+              </span>
+
+              <h3>
+                ملک میں اہم پیش رفت، تازہ صورتحال سامنے آگئی
+              </h3>
+
+            </div>
+
+          </article>
+
+
+          <article class="side-news-card" onclick="openStory(2)">
+
+            <img
+              src="https://images.unsplash.com/photo-1521292270410-a8c4d716d518?auto=format&fit=crop&w=600&q=80"
+              alt="World News">
+
+            <div>
+
+              <span class="news-label">
+                دنیا
+              </span>
+
+              <h3>
+                عالمی سطح پر اہم خبر سامنے آگئی
+              </h3>
+
+            </div>
+
+          </article>
+
+
+          <article class="side-news-card" onclick="openStory(3)">
+
+            <img
+              src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=600&q=80"
+              alt="Sports">
+
+            <div>
+
+              <span class="news-label">
+                کھیل
+              </span>
+
+              <h3>
+                کھیلوں کی دنیا سے بڑی خبر
+              </h3>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- PAKISTAN -->
+      <section class="news-section" id="pakistan">
+
+        <div class="section-heading">
 
           <h2>
-            Latest News
+            پاکستان
           </h2>
 
           <span>
-            Live
+            مزید خبریں
           </span>
 
         </div>
 
 
-        <div id="latestNews">
+        <div class="news-grid">
 
-          <div class="loading">
-            Loading news...
-          </div>
+          <article class="news-card" onclick="openStory(1)">
+
+            <img
+              src="https://images.unsplash.com/photo-1524498250077-390f9e378fc0?auto=format&fit=crop&w=900&q=80"
+              alt="Pakistan">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                پاکستان
+              </span>
+
+              <h3>
+                ملک میں اہم پیش رفت، نئی صورتحال سامنے آگئی
+              </h3>
+
+              <p>
+                تازہ ترین معلومات اور اہم تفصیلات
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="news-card" onclick="openStory(1)">
+
+            <img
+              src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=900&q=80"
+              alt="Pakistan News">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                قومی خبر
+              </span>
+
+              <h3>
+                حکومت کی جانب سے اہم اعلان
+              </h3>
+
+              <p>
+                مزید تفصیلات جلد سامنے آئیں گی
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="news-card" onclick="openStory(1)">
+
+            <img
+              src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80"
+              alt="Pakistan">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                تازہ خبر
+              </span>
+
+              <h3>
+                اہم اجلاس میں بڑے فیصلے
+              </h3>
+
+              <p>
+                تفصیلات کے لیے خبر کھولیں
+              </p>
+
+            </div>
+
+          </article>
 
         </div>
 
-      </aside>
+      </section>
+
+
+
+      <!-- WORLD -->
+      <section class="news-section" id="world">
+
+        <div class="section-heading">
+
+          <h2>
+            دنیا
+          </h2>
+
+          <span>
+            عالمی خبریں
+          </span>
+
+        </div>
+
+
+        <div class="news-grid">
+
+          <article class="news-card" onclick="openStory(2)">
+
+            <img
+              src="https://images.unsplash.com/photo-1521292270410-a8c4d716d518?auto=format&fit=crop&w=900&q=80"
+              alt="World">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                دنیا
+              </span>
+
+              <h3>
+                دنیا بھر سے اہم خبر سامنے آگئی
+              </h3>
+
+              <p>
+                عالمی صورتحال کی تازہ تفصیلات
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="news-card" onclick="openStory(2)">
+
+            <img
+              src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80"
+              alt="World">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                عالمی خبر
+              </span>
+
+              <h3>
+                بین الاقوامی سطح پر اہم پیش رفت
+              </h3>
+
+              <p>
+                مزید معلومات کے لیے خبر کھولیں
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="news-card" onclick="openStory(2)">
+
+            <img
+              src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=900&q=80"
+              alt="World">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                تازہ خبر
+              </span>
+
+              <h3>
+                عالمی اجلاس میں اہم فیصلے
+              </h3>
+
+              <p>
+                خبر کی مکمل تفصیل پڑھیں
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- SPORTS -->
+      <section class="news-section" id="sports">
+
+        <div class="section-heading">
+
+          <h2>
+            کھیل
+          </h2>
+
+          <span>
+            اسپورٹس نیوز
+          </span>
+
+        </div>
+
+
+        <div class="news-grid">
+
+          <article class="news-card" onclick="openStory(3)">
+
+            <img
+              src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80"
+              alt="Sports">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                کھیل
+              </span>
+
+              <h3>
+                کھیلوں کی دنیا میں بڑی خبر
+              </h3>
+
+              <p>
+                تازہ ترین اسپورٹس اپ ڈیٹ
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="news-card" onclick="openStory(3)">
+
+            <img
+              src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=900&q=80"
+              alt="Cricket">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                کرکٹ
+              </span>
+
+              <h3>
+                میچ سے قبل اہم اپ ڈیٹ سامنے آگئی
+              </h3>
+
+              <p>
+                مکمل خبر یہاں پڑھیں
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="news-card" onclick="openStory(3)">
+
+            <img
+              src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=900&q=80"
+              alt="Sports">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                اسپورٹس
+              </span>
+
+              <h3>
+                ٹیم نے اہم کامیابی حاصل کرلی
+              </h3>
+
+              <p>
+                مزید تفصیلات جانیں
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- BUSINESS -->
+      <section class="news-section" id="business">
+
+        <div class="section-heading">
+
+          <h2>
+            کاروبار
+          </h2>
+
+          <span>
+            Business
+          </span>
+
+        </div>
+
+
+        <div class="news-grid">
+
+          <article class="news-card" onclick="openStory(4)">
+
+            <img
+              src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80"
+              alt="Business">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                کاروبار
+              </span>
+
+              <h3>
+                کاروباری دنیا سے اہم اپ ڈیٹ
+              </h3>
+
+              <p>
+                مارکیٹ کی تازہ صورتحال
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="news-card" onclick="openStory(4)">
+
+            <img
+              src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?auto=format&fit=crop&w=900&q=80"
+              alt="Business">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                معیشت
+              </span>
+
+              <h3>
+                مارکیٹ میں اہم تبدیلی
+              </h3>
+
+              <p>
+                تازہ ترین کاروباری خبر
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <article class="news-card" onclick="openStory(4)">
+
+            <img
+              src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=80"
+              alt="Business">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                بزنس
+              </span>
+
+              <h3>
+                کاروباری شعبے میں نئی پیش رفت
+              </h3>
+
+              <p>
+                مکمل تفصیل کے لیے کلک کریں
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- TECHNOLOGY -->
+      <section class="news-section" id="technology">
+
+        <div class="section-heading">
+
+          <h2>
+            ٹیکنالوجی
+          </h2>
+
+          <span>
+            Technology
+          </span>
+
+        </div>
+
+
+        <div class="news-grid">
+
+          <article class="news-card" onclick="openStory(0)">
+
+            <img
+              src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80"
+              alt="Technology">
+
+            <div class="news-card-content">
+
+              <span class="news-label">
+                ٹیکنالوجی
+              </span>
+
+              <h3>
+                ٹیکنالوجی کی دنیا سے بڑی خبر
+              </h3>
+
+              <p>
+                جدید ٹیکنالوجی کی تازہ معلومات
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
 
 
     </div>
 
-
   </main>
 
 
-  <script>
 
-    document.getElementById("date").textContent =
-      new Date().toLocaleDateString(
-        "en-US",
-        {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        }
-      );
+  <!-- FOOTER -->
+  <footer class="footer">
 
-  </script>
+    <div class="container footer-content">
+
+      <div>
+
+        <div class="footer-logo">
+          <span>ONN</span> TV
+        </div>
+
+        <p>
+          Online News Network
+        </p>
+
+        <p>
+          پاکستان اور دنیا کی تازہ ترین خبریں
+        </p>
+
+      </div>
 
 
-  <script src="app.js?v=10"></script>
+      <div class="footer-menu">
+
+        <a href="#home">ہوم</a>
+
+        <a href="#latest">تازہ ترین</a>
+
+        <a href="#pakistan">پاکستان</a>
+
+        <a href="#world">دنیا</a>
+
+        <a href="#sports">کھیل</a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+      © 2026 ONN TV — All Rights Reserved
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- STORY MODAL -->
+  <div class="story-modal" id="storyModal">
+
+    <div class="story-modal-box">
+
+      <button class="close-modal" onclick="closeStory()">
+        ×
+      </button>
+
+
+      <img
+        id="modalImage"
+        src=""
+        alt="Story">
+
+
+      <div class="modal-content">
+
+        <span
+          class="news-label"
+          id="modalCategory">
+          خبر
+        </span>
+
+        <h2 id="modalTitle">
+          خبر
+        </h2>
+
+        <p id="modalText">
+          خبر کی مکمل تفصیل یہاں ظاہر ہوگی۔
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <script src="script.js"></script>
 
 </body>
-
 </html>
