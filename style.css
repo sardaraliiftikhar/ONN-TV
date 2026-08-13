@@ -1,6 +1,6 @@
-/* =========================================
-   ONN TV — PROFESSIONAL URDU NEWS DESIGN
-========================================= */
+/* =====================================================
+   ONN TV — PROFESSIONAL NEWS WEBSITE
+   ===================================================== */
 
 * {
   box-sizing: border-box;
@@ -15,7 +15,9 @@ html {
 body {
   font-family:
     "Noto Nastaliq Urdu",
-    "Noto Sans Arabic",
+    "Noto Naskh Arabic",
+    "Segoe UI",
+    Tahoma,
     Arial,
     sans-serif;
 
@@ -25,90 +27,84 @@ body {
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+  color: inherit;
 }
 
 img {
-  display: block;
   max-width: 100%;
+  display: block;
 }
 
 .container {
-  width: min(1200px, 94%);
+  width: min(1180px, 94%);
   margin: auto;
 }
 
 
-/* =========================================
-   HEADER
-========================================= */
+/* =====================================================
+   TOP HEADER
+   ===================================================== */
 
 .header {
   background: #ffffff;
-  border-top: 5px solid #c40000;
-  border-bottom: 1px solid #ddd;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  transition: box-shadow .25s ease;
-}
-
-.header-scrolled {
-  box-shadow: 0 4px 18px rgba(0,0,0,.12);
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .header-content {
-  min-height: 92px;
+  min-height: 88px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 25px;
 }
 
 
-/* =========================================
+/* =====================================================
    LOGO
-========================================= */
+   ===================================================== */
 
 .logo {
   display: flex;
   align-items: center;
   direction: ltr;
+  gap: 7px;
   font-family: Arial, sans-serif;
   font-weight: 900;
-  letter-spacing: -2px;
 }
 
 .logo-onn {
-  color: #c40000;
-  font-size: 52px;
+  background: #d90000;
+  color: white;
+  font-size: 30px;
   line-height: 1;
+  padding: 9px 13px;
+  letter-spacing: -2px;
 }
 
 .logo-tv {
   color: #111;
-  font-size: 31px;
-  margin-left: 7px;
+  font-size: 30px;
   letter-spacing: -1px;
 }
 
 .header-date {
-  color: #555;
-  font-size: 15px;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 
-/* =========================================
-   NAVIGATION
-========================================= */
+/* =====================================================
+   NAVBAR
+   ===================================================== */
 
 .navbar {
   background: #111;
-  color: #fff;
+  border-bottom: 4px solid #d90000;
   position: sticky;
-  top: 97px;
-  z-index: 999;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav-content {
@@ -118,94 +114,94 @@ img {
 }
 
 .nav-links {
-  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 0;
+  width: 100%;
 }
 
 .nav-links a {
-  padding: 10px 23px;
+  color: #fff;
+  padding: 12px 20px;
   font-size: 16px;
-  border-left: 1px solid #333;
-  transition: background .2s ease;
+  font-weight: 600;
+  transition: .2s ease;
 }
 
 .nav-links a:hover {
-  background: #c40000;
+  background: #d90000;
 }
 
 .menu-button {
   display: none;
-  background: none;
-  color: #fff;
   border: 0;
-  font-size: 28px;
+  background: transparent;
+  color: #fff;
+  font-size: 27px;
   cursor: pointer;
 }
 
 
-/* =========================================
+/* =====================================================
    BREAKING NEWS
-========================================= */
+   ===================================================== */
 
 .breaking-news {
-  margin: 25px 0 18px;
-  background: #fff;
-  border: 1px solid #ddd;
+  margin: 22px 0;
   display: flex;
   align-items: stretch;
+  background: white;
+  border: 1px solid #ddd;
   overflow: hidden;
 }
 
 .breaking-label {
-  background: #c40000;
+  background: #d90000;
   color: #fff;
-  padding: 9px 22px;
-  font-weight: bold;
+  padding: 8px 20px;
+  font-weight: 800;
   white-space: nowrap;
 }
 
 .breaking-text {
+  flex: 1;
   padding: 8px 18px;
-  font-weight: 600;
-  overflow: hidden;
+  color: #333;
+  font-weight: 500;
 }
 
 
-/* =========================================
-   SECTION HEADING
-========================================= */
+/* =====================================================
+   SECTION HEADINGS
+   ===================================================== */
 
 .section-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-right: 6px solid #c40000;
+  border-right: 5px solid #d90000;
+  border-bottom: 1px solid #ddd;
   background: #fff;
   padding: 8px 15px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .section-heading h2 {
-  font-size: 27px;
-  font-weight: 900;
+  font-size: 25px;
+  font-weight: 800;
 }
 
 .section-heading span {
   color: #777;
   font-size: 14px;
-  direction: ltr;
 }
 
 
-/* =========================================
+/* =====================================================
    STORIES
-========================================= */
+   ===================================================== */
 
 .stories-section {
-  margin: 25px 0 35px;
+  margin: 30px 0;
 }
 
 .stories-container {
@@ -216,21 +212,19 @@ img {
 
 .story {
   background: #fff;
-  border: 1px solid #ddd;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+  transition: .25s ease;
   overflow: hidden;
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease;
 }
 
 .story:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 22px rgba(0,0,0,.12);
+  box-shadow: 0 8px 22px rgba(0,0,0,.10);
 }
 
 .story-image {
   height: 145px;
-  background: #ddd;
   overflow: hidden;
 }
 
@@ -238,358 +232,359 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: .3s ease;
+}
+
+.story:hover img {
+  transform: scale(1.05);
 }
 
 .story h3 {
-  font-size: 17px;
-  padding: 9px 11px 12px;
-  line-height: 1.6;
+  padding: 10px 12px 13px;
+  font-size: 16px;
+  line-height: 1.7;
 }
 
 
-/* =========================================
+/* =====================================================
    HERO
-========================================= */
+   ===================================================== */
 
 .hero-section {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+  grid-template-columns: 1.8fr 1fr;
   gap: 18px;
-  margin-bottom: 40px;
+  margin: 30px 0 45px;
 }
 
 .hero-news {
   position: relative;
-  min-height: 480px;
-  background: #111;
+  min-height: 470px;
   overflow: hidden;
+  background: #111;
   cursor: pointer;
 }
 
 .hero-news > img,
-.hero-news > .hero-placeholder {
+.hero-image img {
   width: 100%;
-  height: 480px;
+  height: 100%;
   object-fit: cover;
 }
 
 .hero-overlay {
   position: absolute;
-  inset: auto 0 0;
-  padding: 90px 30px 27px;
-  color: #fff;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 35px 30px 28px;
+  color: white;
   background:
     linear-gradient(
       transparent,
-      rgba(0,0,0,.95)
+      rgba(0,0,0,.92)
     );
-}
-
-.hero-overlay h1 {
-  font-size: 38px;
-  line-height: 1.55;
-  margin: 8px 0;
-}
-
-.hero-overlay p {
-  font-size: 17px;
-  color: #ddd;
 }
 
 .news-label {
   display: inline-block;
-  background: #c40000;
+  background: #d90000;
   color: #fff;
   padding: 2px 10px;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
-.hero-read {
-  display: inline-block;
-  margin-top: 12px;
-  color: #fff;
-  font-weight: bold;
+.hero-overlay h1 {
+  font-size: 34px;
+  line-height: 1.6;
+  margin-bottom: 5px;
+}
+
+.hero-overlay p {
+  color: #eee;
+  font-size: 16px;
 }
 
 
-/* =========================================
+/* =====================================================
    SIDE NEWS
-========================================= */
+   ===================================================== */
 
 .side-news {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 14px;
 }
 
 .side-news-card {
   background: #fff;
-  border: 1px solid #ddd;
   display: grid;
-  grid-template-columns: 145px 1fr;
+  grid-template-columns: 125px 1fr;
   min-height: 145px;
+  gap: 12px;
   overflow: hidden;
-  transition: box-shadow .2s ease;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: .2s ease;
 }
 
 .side-news-card:hover {
-  box-shadow: 0 7px 18px rgba(0,0,0,.1);
+  box-shadow: 0 6px 18px rgba(0,0,0,.09);
 }
 
-.side-news-card img,
-.side-placeholder {
-  width: 145px;
+.side-news-card img {
+  width: 125px;
   height: 145px;
   object-fit: cover;
 }
 
-.side-news-card > div:last-child {
-  padding: 10px 13px;
+.side-news-card > div {
+  padding: 12px 8px 12px 5px;
 }
 
 .side-news-card h3 {
-  font-size: 18px;
-  line-height: 1.55;
-  margin-top: 5px;
+  font-size: 16px;
+  line-height: 1.7;
 }
 
 
-/* =========================================
-   NEWS SECTIONS
-========================================= */
+/* =====================================================
+   NEWS GRID
+   ===================================================== */
 
 .news-section {
-  margin: 40px 0;
+  margin: 45px 0;
 }
 
 .news-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 20px;
 }
 
 .news-card {
-  display: block;
   background: #fff;
   border: 1px solid #ddd;
   overflow: hidden;
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease;
+  cursor: pointer;
+  transition: .25s ease;
 }
 
 .news-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,.1);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,.10);
 }
 
-.news-card > img,
-.news-placeholder {
+.news-card > img {
   width: 100%;
-  height: 220px;
+  height: 210px;
   object-fit: cover;
-  background: #222;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, sans-serif;
-  font-weight: 900;
-  font-size: 35px;
 }
 
 .news-card-content {
-  padding: 12px 15px 15px;
+  padding: 15px;
 }
 
-.news-card h3 {
-  font-size: 21px;
-  line-height: 1.6;
-  margin: 7px 0;
+.news-card-content h3 {
+  font-size: 19px;
+  line-height: 1.7;
+  margin: 4px 0;
 }
 
-.news-card p {
-  color: #666;
+.news-card-content p {
+  color: #777;
   font-size: 14px;
 }
 
-.news-card small {
-  color: #888;
-  display: block;
-  margin-top: 7px;
-  font-family: Arial, sans-serif;
-  direction: ltr;
-  text-align: right;
-}
 
-
-/* =========================================
-   PLACEHOLDERS
-========================================= */
-
-.hero-placeholder,
-.story-placeholder {
-  background: #222;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, sans-serif;
-  font-weight: 900;
-}
-
-.story-placeholder {
-  height: 100%;
-  font-size: 30px;
-}
-
-.side-placeholder {
-  background: #222;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
-  font-weight: 900;
-  font-size: 25px;
-}
-
-
-/* =========================================
+/* =====================================================
    LOADING
-========================================= */
+   ===================================================== */
 
 .loading {
   background: #fff;
-  border: 1px solid #ddd;
-  padding: 25px;
+  padding: 35px;
   text-align: center;
   color: #777;
+  border: 1px solid #ddd;
 }
 
 
-/* =========================================
-   FOOTER
-========================================= */
-
-.footer {
-  margin-top: 60px;
-  background: #111;
-  color: #fff;
-}
-
-.footer-content {
-  min-height: 190px;
-  padding: 35px 0;
-  display: flex;
-  justify-content: space-between;
-  gap: 30px;
-}
-
-.footer-logo {
-  font-family: Arial, sans-serif;
-  font-size: 35px;
-  font-weight: 900;
-  direction: ltr;
-}
-
-.footer-logo span {
-  color: #c40000;
-}
-
-.footer p {
-  color: #bbb;
-  margin-top: 5px;
-}
-
-.footer-menu {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.footer-menu a:hover {
-  color: #e00000;
-}
-
-.copyright {
-  border-top: 1px solid #333;
-  padding: 15px;
-  text-align: center;
-  color: #aaa;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-  direction: ltr;
-}
-
-
-/* =========================================
+/* =====================================================
    ARTICLE PAGE
-========================================= */
+   ===================================================== */
 
-.article-container {
+.article-page {
   max-width: 900px;
-  margin: 40px auto;
+  margin: 45px auto 70px;
 }
 
 .article {
   background: #fff;
-  padding: 30px;
+  padding: 35px 45px 50px;
   border: 1px solid #ddd;
+}
+
+.back-button {
+  display: inline-block;
+  color: #d90000;
+  font-weight: 700;
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+
+.back-button:hover {
+  text-decoration: underline;
 }
 
 .article-category {
   display: inline-block;
-  background: #c40000;
+  background: #d90000;
   color: #fff;
-  padding: 3px 12px;
+  padding: 4px 14px;
   font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 15px;
 }
 
 .article-title {
-  font-size: 42px;
-  line-height: 1.55;
-  margin: 15px 0;
+  font-size: 43px;
+  line-height: 1.65;
+  font-weight: 900;
+  color: #111;
+  margin-bottom: 10px;
 }
 
 .article-date {
   color: #777;
-  font-family: Arial, sans-serif;
-  direction: ltr;
-  text-align: right;
-  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 18px;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.article-image {
+  margin: 25px 0 30px;
+  overflow: hidden;
 }
 
 .article-image img {
   width: 100%;
-  max-height: 600px;
+  max-height: 560px;
   object-fit: cover;
 }
 
 .article-excerpt {
   font-size: 21px;
-  font-weight: bold;
-  line-height: 1.9;
-  border-right: 4px solid #c40000;
-  padding-right: 15px;
+  line-height: 2;
+  font-weight: 700;
+  color: #333;
+  border-right: 4px solid #d90000;
+  padding: 5px 18px 5px 0;
   margin: 25px 0;
 }
 
 .article-content {
-  font-size: 20px;
-  line-height: 2.2;
+  font-size: 19px;
+  line-height: 2.3;
+  color: #222;
 }
 
 .article-content p {
-  margin: 0 0 20px;
+  margin-bottom: 22px;
+}
+
+.article-footer {
+  border-top: 1px solid #ddd;
+  margin-top: 35px;
+  padding-top: 18px;
+  color: #888;
+  font-size: 14px;
+}
+
+.article-error {
+  background: #fff;
+  text-align: center;
+  padding: 70px 30px;
+  border: 1px solid #ddd;
+}
+
+.article-error h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.article-error a {
+  color: #d90000;
+  font-weight: 700;
 }
 
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.footer {
+  background: #111;
+  color: #fff;
+  margin-top: 60px;
+}
+
+.footer-content {
+  padding: 45px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footer-logo {
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  direction: ltr;
+  margin-bottom: 10px;
+}
+
+.footer-logo span {
+  color: #fff;
+  background: #d90000;
+  padding: 3px 7px;
+}
+
+.footer p {
+  color: #bbb;
+  margin: 5px 0;
+}
+
+.footer-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-content: flex-start;
+}
+
+.footer-menu a {
+  color: #ddd;
+}
+
+.footer-menu a:hover {
+  color: #fff;
+}
+
+.copyright {
+  text-align: center;
+  border-top: 1px solid #333;
+  padding: 17px;
+  color: #999;
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   RESPONSIVE — TABLET
+   ===================================================== */
 
 @media (max-width: 900px) {
 
@@ -605,30 +600,30 @@ img {
     min-height: 400px;
   }
 
-  .hero-news > img,
-  .hero-news > .hero-placeholder {
-    height: 400px;
-  }
-
   .news-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .article-title {
+    font-size: 35px;
   }
 
 }
 
 
+/* =====================================================
+   RESPONSIVE — MOBILE
+   ===================================================== */
+
 @media (max-width: 650px) {
 
   .header-content {
-    min-height: 75px;
+    min-height: 72px;
   }
 
-  .logo-onn {
-    font-size: 40px;
-  }
-
+  .logo-onn,
   .logo-tv {
-    font-size: 25px;
+    font-size: 23px;
   }
 
   .header-date {
@@ -636,19 +631,18 @@ img {
   }
 
   .navbar {
-    top: 80px;
+    position: relative;
   }
 
   .menu-button {
     display: block;
-    margin-right: 10px;
+    padding: 7px 0;
   }
 
   .nav-links {
     display: none;
     flex-direction: column;
     align-items: stretch;
-    background: #111;
   }
 
   .nav-links.open {
@@ -656,9 +650,8 @@ img {
   }
 
   .nav-links a {
-    border-bottom: 1px solid #333;
-    border-left: 0;
-    text-align: right;
+    text-align: center;
+    border-top: 1px solid #333;
   }
 
   .breaking-news {
@@ -677,65 +670,59 @@ img {
     height: 120px;
   }
 
-  .hero-news,
-  .hero-news > img,
-  .hero-news > .hero-placeholder {
-    min-height: 340px;
-    height: 340px;
+  .hero-news {
+    min-height: 330px;
   }
 
   .hero-overlay {
-    padding: 70px 18px 18px;
+    padding: 20px 16px;
   }
 
   .hero-overlay h1 {
-    font-size: 25px;
-  }
-
-  .hero-overlay p {
-    font-size: 14px;
+    font-size: 24px;
   }
 
   .side-news-card {
-    grid-template-columns: 110px 1fr;
+    grid-template-columns: 100px 1fr;
   }
 
-  .side-news-card img,
-  .side-placeholder {
-    width: 110px;
-    height: 110px;
-  }
-
-  .side-news-card {
-    min-height: 110px;
-  }
-
-  .side-news-card h3 {
-    font-size: 15px;
+  .side-news-card img {
+    width: 100px;
+    height: 120px;
   }
 
   .news-grid {
     grid-template-columns: 1fr;
   }
 
-  .news-card h3 {
-    font-size: 20px;
+  .news-card > img {
+    height: 220px;
+  }
+
+  .article-page {
+    margin: 20px auto 40px;
+  }
+
+  .article {
+    padding: 25px 18px 35px;
+  }
+
+  .article-title {
+    font-size: 28px;
+    line-height: 1.8;
+  }
+
+  .article-excerpt {
+    font-size: 18px;
+  }
+
+  .article-content {
+    font-size: 17px;
+    line-height: 2.2;
   }
 
   .footer-content {
     flex-direction: column;
-  }
-
-  .article {
-    padding: 18px;
-  }
-
-  .article-title {
-    font-size: 29px;
-  }
-
-  .article-content {
-    font-size: 18px;
   }
 
 }
