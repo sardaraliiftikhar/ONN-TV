@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONN TV | Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html"><span>ONN</span> TV</a>
+      <strong>ADMIN PANEL</strong>
+    </div>
+  </header>
+
+  <main class="container article-page">
+
+    <section id="loginBox">
+      <span class="category">ONN TV ADMIN</span>
+      <h1>Admin Login</h1>
+
+      <form id="loginForm">
+        <input id="email" type="email" placeholder="Admin Email" required>
+        <input id="password" type="password" placeholder="Password" required>
+
+        <button type="submit" class="admin-btn">Login</button>
+
+        <p id="loginMessage"></p>
+      </form>
+    </section>
+
+
+    <section id="adminPanel" style="display:none">
+
+      <div class="admin-top">
+        <div>
+          <span class="category">ONN TV</span>
+          <h1>Publish News</h1>
+        </div>
+
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </div>
+
+
+      <form id="newsForm">
+
+        <label>News Title</label>
+        <input id="title" type="text" placeholder="Enter news title" required>
+
+        <label>Excerpt</label>
+        <textarea id="excerpt" placeholder="Short news summary"></textarea>
+
+        <label>Full Article</label>
+        <textarea id="content" rows="10" placeholder="Write complete news article..." required></textarea>
+
+        <label>Category</label>
+        <select id="category">
+          <option value="Pakistan">Pakistan</option>
+          <option value="World">World</option>
+          <option value="Sports">Sports</option>
+          <option value="Business">Business</option>
+          <option value="Technology">Technology</option>
+          <option value="Entertainment">Entertainment</option>
+        </select>
+
+        <label>Author</label>
+        <input id="author" type="text" value="ONN TV News Desk">
+
+        <label>News Image</label>
+        <input id="image" type="file" accept="image/*">
+
+        <button type="submit" class="admin-btn">
+          Publish News
+        </button>
+
+        <p id="status"></p>
+
+      </form>
+
+    </section>
+
+  </main>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
