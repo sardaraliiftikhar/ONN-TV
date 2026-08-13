@@ -1,511 +1,380 @@
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ONN TV — Admin Panel</title>
+  <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="style.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-    <style>
-        body {
-            background: #f3f4f6;
-        }
+  <title>ایڈمن پینل | ONN TV</title>
 
-        .admin-page {
-            min-height: 100vh;
-        }
+  <link rel="stylesheet" href="style.css">
 
-        .admin-header {
-            background: #111;
-            color: white;
-            padding: 18px 0;
-        }
-
-        .admin-header-inner {
-            width: 94%;
-            max-width: 1200px;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .admin-logo {
-            font-size: 25px;
-            font-weight: 900;
-            direction: ltr;
-        }
-
-        .admin-logo span {
-            background: #e00000;
-            padding: 4px 9px;
-            border-radius: 5px;
-        }
-
-        .admin-container {
-            width: 94%;
-            max-width: 1100px;
-            margin: 35px auto;
-        }
-
-        .login-box,
-        .dashboard {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 5px 25px rgba(0,0,0,.07);
-        }
-
-        .login-box {
-            max-width: 450px;
-            margin: 70px auto;
-        }
-
-        .login-box h1,
-        .dashboard h1 {
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 7px;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 7px;
-            font-size: 15px;
-            font-family: inherit;
-        }
-
-        .form-group textarea {
-            min-height: 180px;
-            resize: vertical;
-        }
-
-        .admin-button {
-            border: none;
-            background: #e00000;
-            color: white;
-            padding: 12px 22px;
-            border-radius: 7px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 15px;
-        }
-
-        .admin-button:hover {
-            background: #c90000;
-        }
-
-        .logout-button {
-            background: #333;
-        }
-
-        .admin-message {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 6px;
-            display: none;
-        }
-
-        .admin-message.show {
-            display: block;
-        }
-
-        .dashboard {
-            display: none;
-        }
-
-        .dashboard-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            gap: 15px;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .admin-card {
-            background: #fafafa;
-            border: 1px solid #eee;
-            padding: 22px;
-            border-radius: 10px;
-        }
-
-        .admin-card h2 {
-            margin-bottom: 10px;
-        }
-
-        .private-note {
-            background: #fff4f4;
-            border-right: 4px solid #e00000;
-            padding: 14px;
-            margin-bottom: 25px;
-            line-height: 1.8;
-        }
-
-        @media(max-width:700px) {
-
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .dashboard-top {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-    </style>
 </head>
+
 
 <body>
 
-<div class="admin-page">
 
-    <header class="admin-header">
+  <!-- HEADER -->
 
-        <div class="admin-header-inner">
+  <header class="header">
 
-            <div class="admin-logo">
-                <span>ONN</span> TV — ADMIN
-            </div>
+    <div class="container header-content">
 
-            <a href="index.html"
-               style="color:white;text-decoration:none;">
-                ← ویب سائٹ
-            </a>
+      <a
+        href="index.html"
+        class="logo">
+
+        <span class="logo-onn">
+          ONN
+        </span>
+
+        <span class="logo-tv">
+          TV
+        </span>
+
+      </a>
+
+
+      <div class="header-date">
+
+        ONN TV نیوز روم
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- NAVIGATION -->
+
+  <nav class="navbar">
+
+    <div class="container nav-content">
+
+      <div class="nav-links">
+
+        <a href="index.html">
+          ہوم
+        </a>
+
+        <a href="index.html#latest">
+          تازہ ترین
+        </a>
+
+        <a href="index.html#pakistan">
+          پاکستان
+        </a>
+
+        <a href="index.html#world">
+          دنیا
+        </a>
+
+        <a href="index.html#sports">
+          کھیل
+        </a>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+  <!-- ADMIN AREA -->
+
+  <main>
+
+    <div class="container">
+
+
+      <!-- LOGIN -->
+
+      <section
+        id="loginBox"
+        class="admin-box">
+
+        <div class="admin-header">
+
+          <span class="admin-icon">
+            🔐
+          </span>
+
+          <h1>
+            ONN TV ایڈمن لاگ اِن
+          </h1>
+
+          <p>
+            صرف مجاز صارفین کے لیے
+          </p>
 
         </div>
 
-    </header>
+
+        <form id="loginForm">
 
 
-    <!-- LOGIN -->
+          <label for="email">
+            ای میل
+          </label>
 
-    <section class="admin-container" id="loginSection">
-
-        <div class="login-box">
-
-            <h1>Admin Login</h1>
-
-            <p style="color:#777;margin-bottom:25px;">
-                صرف ONN TV کے منتظم کے لیے
-            </p>
-
-
-            <div class="form-group">
-
-                <label>
-                    Email
-                </label>
-
-                <input
-                    type="email"
-                    id="adminEmail"
-                    placeholder="Admin Email">
-
-            </div>
+          <input
+            type="email"
+            id="email"
+            placeholder="اپنی ای میل درج کریں"
+            required
+          >
 
 
-            <div class="form-group">
+          <label for="password">
+            پاس ورڈ
+          </label>
 
-                <label>
-                    Password
-                </label>
-
-                <input
-                    type="password"
-                    id="adminPassword"
-                    placeholder="Password">
-
-            </div>
+          <input
+            type="password"
+            id="password"
+            placeholder="اپنا پاس ورڈ درج کریں"
+            required
+          >
 
 
-            <button
-                class="admin-button"
-                id="loginButton">
+          <button
+            type="submit"
+            class="admin-button">
 
-                Login
+            لاگ اِن کریں
 
-            </button>
+          </button>
 
 
-            <div
-                class="admin-message"
-                id="loginMessage">
-            </div>
+          <div
+            id="loginMessage"
+            class="admin-message">
+          </div>
+
+        </form>
+
+      </section>
+
+
+      <!-- ADMIN PANEL -->
+
+      <section
+        id="adminPanel"
+        class="admin-box"
+        style="display:none;">
+
+
+        <div class="admin-header">
+
+          <span class="admin-icon">
+            📰
+          </span>
+
+          <h1>
+            ONN TV نیوز ڈیسک
+          </h1>
+
+          <p>
+            نئی خبر شائع کریں
+          </p>
 
         </div>
 
-    </section>
+
+        <form id="newsForm">
 
 
-    <!-- DASHBOARD -->
+          <label for="title">
+            خبر کا عنوان
+          </label>
 
-    <section class="admin-container">
-
-        <div class="dashboard" id="dashboard">
-
-            <div class="dashboard-top">
-
-                <div>
-
-                    <h1>
-                        ONN TV Admin Dashboard
-                    </h1>
-
-                    <p style="color:#777;">
-                        News اور Stories کو manage کریں
-                    </p>
-
-                </div>
+          <input
+            type="text"
+            id="title"
+            placeholder="خبر کا مکمل عنوان"
+            required
+          >
 
 
-                <button
-                    class="admin-button logout-button"
-                    id="logoutButton">
+          <label for="category">
+            شعبہ / کیٹیگری
+          </label>
 
-                    Logout
+          <select
+            id="category"
+            required>
 
-                </button>
+            <option value="">
+              کیٹیگری منتخب کریں
+            </option>
 
-            </div>
+            <option value="پاکستان">
+              پاکستان
+            </option>
 
+            <option value="دنیا">
+              دنیا
+            </option>
 
-            <div class="private-note">
+            <option value="کھیل">
+              کھیل
+            </option>
 
-                🔐 یہ Admin Panel صرف authenticated administrator
-                کے لیے ہے۔ Public website پر اس dashboard کا
-                کوئی visible link نہیں رکھا جائے گا۔
+            <option value="کاروبار">
+              کاروبار
+            </option>
 
-            </div>
+            <option value="ٹیکنالوجی">
+              ٹیکنالوجی
+            </option>
 
+            <option value="اہم خبر">
+              اہم خبر
+            </option>
 
-            <div class="dashboard-grid">
-
-
-                <!-- ADD NEWS -->
-
-                <div class="admin-card">
-
-                    <h2>
-                        📰 نئی خبر
-                    </h2>
-
-                    <p>
-                        نئی news add کرنے کا نظام یہاں ہوگا۔
-                    </p>
-
-                    <br>
-
-                    <button
-                        class="admin-button"
-                        id="addNewsButton">
-
-                        Add News
-
-                    </button>
-
-                </div>
+          </select>
 
 
-                <!-- STORIES -->
+          <label for="excerpt">
+            مختصر خبر
+          </label>
 
-                <div class="admin-card">
-
-                    <h2>
-                        📸 Stories
-                    </h2>
-
-                    <p>
-                        Story image، title اور story manage کریں۔
-                    </p>
-
-                    <br>
-
-                    <button
-                        class="admin-button"
-                        id="manageStoriesButton">
-
-                        Manage Stories
-
-                    </button>
-
-                </div>
+          <textarea
+            id="excerpt"
+            rows="4"
+            placeholder="خبر کا مختصر خلاصہ لکھیں..."
+            required>
+          </textarea>
 
 
-                <!-- EXISTING NEWS -->
+          <label for="content">
+            مکمل خبر
+          </label>
 
-                <div class="admin-card">
-
-                    <h2>
-                        📋 News Management
-                    </h2>
-
-                    <p>
-                        موجودہ خبریں edit یا delete کریں۔
-                    </p>
-
-                    <br>
-
-                    <button
-                        class="admin-button"
-                        id="manageNewsButton">
-
-                        Manage News
-
-                    </button>
-
-                </div>
+          <textarea
+            id="content"
+            rows="12"
+            placeholder="یہاں خبر کی مکمل تفصیل لکھیں..."
+            required>
+          </textarea>
 
 
-                <!-- SETTINGS -->
+          <label for="author">
+            رپورٹر / مصنف
+          </label>
 
-                <div class="admin-card">
+          <input
+            type="text"
+            id="author"
+            value="ONN TV نیوز ڈیسک"
+          >
 
-                    <h2>
-                        ⚙️ Settings
-                    </h2>
 
-                    <p>
-                        ONN TV website settings۔
-                    </p>
+          <label for="image">
+            خبر کی تصویر
+          </label>
 
-                    <br>
+          <input
+            type="file"
+            id="image"
+            accept="image/*"
+          >
 
-                    <button
-                        class="admin-button"
-                        id="settingsButton">
 
-                        Settings
+          <button
+            type="submit"
+            class="admin-button">
 
-                    </button>
+            📰 خبر شائع کریں
 
-                </div>
+          </button>
 
-            </div>
+
+          <button
+            type="button"
+            id="logoutBtn"
+            class="logout-button">
+
+            لاگ آؤٹ
+
+          </button>
+
+
+          <div
+            id="status"
+            class="admin-message">
+          </div>
+
+
+        </form>
+
+      </section>
+
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="container footer-content">
+
+      <div>
+
+        <div class="footer-logo">
+
+          <span>
+            ONN
+          </span>
+
+          TV
 
         </div>
 
-    </section>
+        <p>
+          آن لائن نیوز نیٹ ورک
+        </p>
 
-</div>
+        <p>
+          نیوز روم — صرف مجاز صارفین کے لیے
+        </p>
 
+      </div>
 
-<script>
-
-const loginSection =
-    document.getElementById("loginSection");
-
-const dashboard =
-    document.getElementById("dashboard");
-
-const loginButton =
-    document.getElementById("loginButton");
-
-const logoutButton =
-    document.getElementById("logoutButton");
-
-const loginMessage =
-    document.getElementById("loginMessage");
+    </div>
 
 
-/*
-    IMPORTANT:
+    <div class="copyright">
 
-    ابھی صرف interface تیار کیا جا رہا ہے۔
-    اصل Supabase Authentication اگلے مرحلے
-    میں موجودہ project کی credentials کے مطابق
-    connect کی جائے گی۔
-*/
+      © 2026 او این این ٹی وی — جملہ حقوق محفوظ ہیں
 
+    </div>
 
-function showDashboard() {
-
-    loginSection.style.display = "none";
-
-    dashboard.style.display = "block";
-
-}
+  </footer>
 
 
-function showLogin() {
+  <!-- SUPABASE -->
 
-    loginSection.style.display = "block";
-
-    dashboard.style.display = "none";
-
-}
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+  </script>
 
 
-/*
-    Temporary local session.
-    یہ اصل security نہیں ہے۔
-    اگلے step میں Supabase Auth لگایا جائے گا۔
-*/
+  <script src="config.js"></script>
 
-loginButton.addEventListener("click", function() {
+  <script src="admin.js"></script>
 
-    const email =
-        document.getElementById("adminEmail").value.trim();
-
-    const password =
-        document.getElementById("adminPassword").value;
-
-    if (!email || !password) {
-
-        loginMessage.textContent =
-            "Email اور Password درج کریں۔";
-
-        loginMessage.style.background = "#fff0f0";
-
-        loginMessage.classList.add("show");
-
-        return;
-    }
-
-
-    /*
-       ابھی fake login نہیں کریں گے۔
-       جب Supabase Auth connect ہوگا تب
-       اصل email/password verify ہوگا۔
-    */
-
-    loginMessage.textContent =
-        "Authentication ابھی configure نہیں ہوئی۔ اگلے step میں آپ کے موجودہ Supabase project سے connect کریں گے۔";
-
-    loginMessage.style.background = "#fff8e6";
-
-    loginMessage.classList.add("show");
-
-});
-
-
-logoutButton.addEventListener("click", function() {
-
-    showLogin();
-
-});
-
-
-</script>
 
 </body>
+
 </html>
