@@ -2,60 +2,82 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>ONN TV | Online News Network</title>
 
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=10">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
+
 </head>
+
 
 <body>
 
   <!-- TOP BAR -->
-  <div class="top-bar">
-    <div class="container">
-      <span id="todayDate"></span>
-      <span>ONN TV • Online News Network</span>
+  <div class="topbar">
+
+    <div class="page">
+
+      <div id="date"></div>
+
+      <div>
+        ONN TV • Online News Network
+      </div>
+
     </div>
+
   </div>
 
 
   <!-- HEADER -->
   <header class="header">
 
-    <div class="container header-inner">
+    <div class="page header-inner">
 
       <a href="index.html" class="logo">
         <span>ONN</span> TV
       </a>
 
-      <nav>
+
+      <nav class="menu">
+
         <a href="index.html">Home</a>
+
         <a href="#latest">Latest</a>
+
         <a href="#pakistan">Pakistan</a>
+
         <a href="#world">World</a>
+
         <a href="#sports">Sports</a>
+
         <a href="#business">Business</a>
+
         <a href="#technology">Technology</a>
+
       </nav>
+
+
+      <div class="search-icon">
+        ⌕
+      </div>
 
     </div>
 
   </header>
 
 
-  <!-- BREAKING NEWS -->
-  <div class="breaking-bar">
+  <!-- BREAKING -->
+  <div class="breaking">
 
-    <div class="container breaking-inner">
+    <div class="page breaking-inner">
 
-      <span class="breaking-label">
-        BREAKING
-      </span>
+      <strong>BREAKING</strong>
 
       <span>
         Welcome to ONN TV — Online News Network
@@ -66,34 +88,44 @@
   </div>
 
 
-  <!-- MAIN -->
-  <main class="container">
-
-    <div class="news-layout">
+  <!-- CONTENT -->
+  <main class="page main">
 
 
-      <!-- HERO -->
-      <section class="hero-card">
+    <div class="home-grid">
+
+
+      <!-- ================= HERO ================= -->
+
+      <section class="hero" id="hero">
 
         <div class="hero-image">
-          <span>ONN TV</span>
+
+          <div class="hero-placeholder">
+            ONN TV
+          </div>
+
         </div>
 
-        <div class="hero-content">
 
-          <span class="category">
+        <div class="hero-info">
+
+          <div class="category">
             TOP STORY
-          </span>
+          </div>
+
 
           <h1>
             Latest News
           </h1>
 
+
           <p>
             Get the latest news and updates from ONN TV.
           </p>
 
-          <a href="#" class="read-more">
+
+          <a href="#" class="read-button">
             Read Full Story →
           </a>
 
@@ -102,37 +134,43 @@
       </section>
 
 
-      <!-- LATEST NEWS -->
-      <aside class="latest-box" id="latest">
+      <!-- ================= LATEST ================= -->
 
-        <div class="latest-header">
+      <aside class="latest" id="latest">
+
+        <div class="latest-title">
 
           <h2>
             Latest News
           </h2>
 
-          <span class="latest-live">
+          <span>
             Live
           </span>
 
         </div>
 
-        <div id="latestNews"></div>
+
+        <div id="latestNews">
+
+          <div class="loading">
+            Loading news...
+          </div>
+
+        </div>
 
       </aside>
 
 
     </div>
 
+
   </main>
 
 
   <script>
 
-    const dateElement =
-      document.getElementById("todayDate");
-
-    dateElement.textContent =
+    document.getElementById("date").textContent =
       new Date().toLocaleDateString(
         "en-US",
         {
@@ -146,7 +184,8 @@
   </script>
 
 
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=10"></script>
 
 </body>
+
 </html>
