@@ -5,297 +5,152 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ONN TV — ایڈمن پینل</title>
+  <title>او این این ٹی وی — آن لائن نیوز نیٹ ورک</title>
+
+  <meta
+    name="description"
+    content="او این این ٹی وی — پاکستان اور دنیا کی تازہ ترین خبریں"
+  >
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="header">
+  <!-- ================= HEADER ================= -->
 
-  <div class="container header-content">
+  <header class="header">
 
-    <a href="index.html" class="logo">
+    <div class="container header-content">
 
-      <span class="logo-onn">
-        ONN
-      </span>
+      <a
+        href="index.html"
+        class="logo"
+        aria-label="ONN TV"
+      >
 
-      <span class="logo-tv">
-        TV
-      </span>
-
-    </a>
-
-    <div class="header-date">
-      ایڈمن پینل
-    </div>
-
-  </div>
-
-</header>
-
-
-<main>
-
-  <div class="container">
-
-
-    <!-- ================= LOGIN ================= -->
-
-    <div
-      class="admin-box"
-      id="loginBox">
-
-      <div class="admin-header">
-
-        <span class="admin-icon">
-          🔐
+        <span class="logo-onn">
+          ONN
         </span>
 
-        <h1>
-          ONN TV ایڈمن
-        </h1>
+        <span class="logo-tv">
+          TV
+        </span>
 
-        <p>
-          News Management System
-        </p>
+      </a>
 
+      <div
+        class="header-date"
+        id="currentDate">
+        آج کی تازہ خبریں
       </div>
-
-
-      <form id="loginForm">
-
-        <label>
-          ای میل
-        </label>
-
-        <input
-          type="email"
-          id="email"
-          placeholder="Admin Email"
-          required
-        >
-
-
-        <label>
-          پاس ورڈ
-        </label>
-
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          required
-        >
-
-
-        <button
-          type="submit"
-          class="admin-button">
-
-          لاگ اِن
-
-        </button>
-
-
-        <div
-          class="admin-message"
-          id="loginMessage">
-        </div>
-
-      </form>
 
     </div>
 
-
-    <!-- ================= ADMIN PANEL ================= -->
-
-    <div
-      class="admin-box"
-      id="adminPanel"
-      style="display:none;">
+  </header>
 
 
-      <div class="admin-header">
+  <!-- ================= NAVIGATION ================= -->
 
-        <span class="admin-icon">
-          📰
-        </span>
+  <nav class="navbar">
 
-        <h1>
-          ONN TV News Desk
-        </h1>
+    <div class="container nav-content">
 
-        <p>
-          خبریں شائع کریں اور manage کریں
-        </p>
+      <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="مینو کھولیں">
+
+        ☰
+
+      </button>
+
+
+      <div
+        class="nav-links"
+        id="navLinks">
+
+        <a href="#home">
+          ہوم
+        </a>
+
+        <a href="#latest">
+          تازہ ترین
+        </a>
+
+        <a href="#pakistan">
+          پاکستان
+        </a>
+
+        <a href="#world">
+          دنیا
+        </a>
+
+        <a href="#sports">
+          کھیل
+        </a>
+
+        <a href="#business">
+          کاروبار
+        </a>
+
+        <a href="#technology">
+          ٹیکنالوجی
+        </a>
 
       </div>
 
+    </div>
 
-      <!-- ================= NEWS FORM ================= -->
-
-      <form id="newsForm">
-
-
-        <input
-          type="hidden"
-          id="editingId"
-        >
+  </nav>
 
 
-        <label>
-          خبر کا عنوان
-        </label>
+  <!-- ================= MAIN ================= -->
 
-        <input
-          type="text"
-          id="title"
-          placeholder="خبر کا مکمل عنوان"
-          required
-        >
+  <main id="home">
+
+    <div class="container">
 
 
-        <label>
-          کیٹیگری
-        </label>
+      <!-- ================= BREAKING NEWS ================= -->
 
-        <select
-          id="category"
-          required>
+      <section class="breaking-news">
 
-          <option value="">
-            کیٹیگری منتخب کریں
-          </option>
-
-          <option value="پاکستان">
-            پاکستان
-          </option>
-
-          <option value="دنیا">
-            دنیا
-          </option>
-
-          <option value="کھیل">
-            کھیل
-          </option>
-
-          <option value="کاروبار">
-            کاروبار
-          </option>
-
-          <option value="ٹیکنالوجی">
-            ٹیکنالوجی
-          </option>
-
-          <option value="دیگر">
-            دیگر
-          </option>
-
-        </select>
-
-
-        <label>
-          مختصر خبر
-        </label>
-
-        <textarea
-          id="excerpt"
-          rows="4"
-          placeholder="خبر کا مختصر خلاصہ..."
-          required></textarea>
-
-
-        <label>
-          مکمل خبر
-        </label>
-
-        <textarea
-          id="content"
-          rows="12"
-          placeholder="خبر کی مکمل تفصیل..."
-          required></textarea>
-
-
-        <label>
-          رپورٹر / مصنف
-        </label>
-
-        <input
-          type="text"
-          id="author"
-          value="ONN TV News Desk"
-        >
-
-
-        <label>
-          خبر کی نئی تصویر
-        </label>
-
-        <input
-          type="file"
-          id="image"
-          accept="image/*"
-        >
-
-
-        <button
-          type="submit"
-          class="admin-button"
-          id="publishButton">
-
-          📰 خبر شائع کریں
-
-        </button>
-
-
-        <button
-          type="button"
-          class="logout-button"
-          id="cancelEdit"
-          style="display:none;">
-
-          ❌ Edit Cancel کریں
-
-        </button>
-
-
-        <div
-          class="admin-message"
-          id="status">
+        <div class="breaking-label">
+          بریکنگ نیوز
         </div>
 
-      </form>
+        <div
+          class="breaking-text"
+          id="breakingText">
+
+          تازہ ترین خبر لوڈ ہو رہی ہے...
+
+        </div>
+
+      </section>
 
 
-      <!-- ================= NEWS LIST ================= -->
+      <!-- ================= STORIES ================= -->
 
-      <div class="admin-news-area">
+      <section class="stories-section">
 
-
-        <div class="admin-news-title">
+        <div class="section-heading">
 
           <h2>
-            📰 موجودہ خبریں
+            آج کی اہم اسٹوریز
           </h2>
 
-          <button
-            type="button"
-            id="refreshNews"
-            class="refresh-button">
-
-            🔄 Refresh
-
-          </button>
+          <span>
+            او این این ٹی وی
+          </span>
 
         </div>
 
 
         <div
-          id="adminNewsList"
-          class="admin-news-list">
+          class="stories-container"
+          id="storiesContainer">
 
           <div class="loading">
             خبریں لوڈ ہو رہی ہیں...
@@ -303,89 +158,326 @@
 
         </div>
 
-      </div>
+      </section>
 
 
-      <!-- ================= LOGOUT ================= -->
+      <!-- ================= HERO ================= -->
 
-      <div style="padding: 0 35px 35px;">
+      <section
+        class="hero-section"
+        id="latest">
 
-        <button
-          id="logoutBtn"
-          class="logout-button">
+        <div
+          id="hero"
+          class="hero-news">
 
-          Logout
+          <div class="loading">
+            اہم خبر لوڈ ہو رہی ہے...
+          </div>
 
-        </button>
+        </div>
 
-      </div>
+
+        <!-- SIDE NEWS -->
+
+        <div
+          class="side-news"
+          id="sideNews">
+
+          <div class="loading">
+            مزید خبریں لوڈ ہو رہی ہیں...
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= LATEST NEWS ================= -->
+
+      <section class="news-section">
+
+        <div class="section-heading">
+
+          <h2>
+            تازہ ترین خبریں
+          </h2>
+
+          <span>
+            تمام تازہ اپ ڈیٹس
+          </span>
+
+        </div>
+
+
+        <div
+          class="news-grid"
+          id="latestNews">
+
+          <div class="loading">
+            خبریں لوڈ ہو رہی ہیں...
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= PAKISTAN ================= -->
+
+      <section
+        class="news-section"
+        id="pakistan">
+
+        <div class="section-heading">
+
+          <h2>
+            پاکستان
+          </h2>
+
+          <span>
+            قومی خبریں
+          </span>
+
+        </div>
+
+
+        <div
+          class="news-grid"
+          id="pakistanNews">
+
+          <div class="loading">
+            پاکستان کی خبریں لوڈ ہو رہی ہیں...
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= WORLD ================= -->
+
+      <section
+        class="news-section"
+        id="world">
+
+        <div class="section-heading">
+
+          <h2>
+            دنیا
+          </h2>
+
+          <span>
+            عالمی خبریں
+          </span>
+
+        </div>
+
+
+        <div
+          class="news-grid"
+          id="worldNews">
+
+          <div class="loading">
+            عالمی خبریں لوڈ ہو رہی ہیں...
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= SPORTS ================= -->
+
+      <section
+        class="news-section"
+        id="sports">
+
+        <div class="section-heading">
+
+          <h2>
+            کھیل
+          </h2>
+
+          <span>
+            کھیلوں کی تازہ خبریں
+          </span>
+
+        </div>
+
+
+        <div
+          class="news-grid"
+          id="sportsNews">
+
+          <div class="loading">
+            کھیلوں کی خبریں لوڈ ہو رہی ہیں...
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= BUSINESS ================= -->
+
+      <section
+        class="news-section"
+        id="business">
+
+        <div class="section-heading">
+
+          <h2>
+            کاروبار
+          </h2>
+
+          <span>
+            کاروباری خبریں
+          </span>
+
+        </div>
+
+
+        <div
+          class="news-grid"
+          id="businessNews">
+
+          <div class="loading">
+            کاروباری خبریں لوڈ ہو رہی ہیں...
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= TECHNOLOGY ================= -->
+
+      <section
+        class="news-section"
+        id="technology">
+
+        <div class="section-heading">
+
+          <h2>
+            ٹیکنالوجی
+          </h2>
+
+          <span>
+            ٹیکنالوجی کی تازہ خبریں
+          </span>
+
+        </div>
+
+
+        <div
+          class="news-grid"
+          id="technologyNews">
+
+          <div class="loading">
+            ٹیکنالوجی کی خبریں لوڈ ہو رہی ہیں...
+          </div>
+
+        </div>
+
+      </section>
 
 
     </div>
 
-  </div>
-
-</main>
+  </main>
 
 
-<footer class="footer">
+  <!-- ================= FOOTER ================= -->
 
-  <div class="container footer-content">
+  <footer class="footer">
 
-    <div>
+    <div class="container footer-content">
 
-      <div class="footer-logo">
 
-        <span>
-          ONN
-        </span>
+      <div>
 
-        TV
+        <div class="footer-logo">
+
+          <span>
+            ONN
+          </span>
+
+          TV
+
+        </div>
+
+
+        <p>
+          آن لائن نیوز نیٹ ورک
+        </p>
+
+
+        <p>
+          پاکستان اور دنیا کی تازہ ترین خبریں
+        </p>
 
       </div>
 
-      <p>
-        ONN TV News Management
-      </p>
+
+      <div class="footer-menu">
+
+        <a href="#home">
+          ہوم
+        </a>
+
+        <a href="#latest">
+          تازہ ترین
+        </a>
+
+        <a href="#pakistan">
+          پاکستان
+        </a>
+
+        <a href="#world">
+          دنیا
+        </a>
+
+        <a href="#sports">
+          کھیل
+        </a>
+
+        <a href="#business">
+          کاروبار
+        </a>
+
+      </div>
 
     </div>
 
 
-    <div class="footer-menu">
+    <div class="copyright">
 
-      <a href="index.html">
-        🏠 ویب سائٹ
-      </a>
+      © 2026 او این این ٹی وی — جملہ حقوق محفوظ ہیں
 
     </div>
 
-  </div>
+  </footer>
 
 
-  <div class="copyright">
+  <!-- ================= SUPABASE ================= -->
 
-    © 2026 ONN TV — Admin Panel
-
-  </div>
-
-</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-<!-- SUPABASE -->
+  <!-- ================= CONFIG ================= -->
 
-<script
-  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-</script>
+  <script src="config.js"></script>
 
 
-<!-- CONFIG -->
+  <!-- ================= NEWS SYSTEM ================= -->
 
-<script src="config.js"></script>
+  <script src="app.js"></script>
 
 
-<!-- ADMIN SYSTEM -->
+  <!-- ================= HOMEPAGE SCRIPT ================= -->
 
-<script src="admin.js"></script>
+  <script src="script.js"></script>
 
 
 </body>
