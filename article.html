@@ -1,97 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ONN TV | News</title>
+  <title>خبر | ONN TV</title>
 
-  <link rel="stylesheet" href="style.css?v=11">
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <div class="page">
-      <span id="date"></span>
-      <span>ONN TV • Online News Network</span>
-    </div>
-  </div>
-
-
-  <!-- HEADER -->
   <header class="header">
-
-    <div class="page header-inner">
+    <div class="container header-content">
 
       <a href="index.html" class="logo">
-        <span>ONN</span> TV
+        <span class="logo-onn">ONN</span>
+        <span class="logo-tv">TV</span>
       </a>
 
-      <nav class="menu">
-        <a href="index.html">Home</a>
-        <a href="index.html#latest">Latest</a>
-        <a href="index.html#pakistan">Pakistan</a>
-        <a href="index.html#world">World</a>
-        <a href="index.html#sports">Sports</a>
-        <a href="index.html#business">Business</a>
-        <a href="index.html#technology">Technology</a>
-      </nav>
+      <div id="currentDate" class="header-date">
+        آج کی تازہ خبریں
+      </div>
 
     </div>
-
   </header>
 
 
-  <!-- BREAKING -->
-  <div class="breaking">
-    <div class="page breaking-inner">
-      <strong>BREAKING</strong>
-      <span>ONN TV — Online News Network</span>
-    </div>
-  </div>
+  <nav class="navbar">
+    <div class="container nav-content">
 
+      <button
+        class="menu-button"
+        id="menuButton">
+        ☰
+      </button>
 
-  <!-- ARTICLE -->
-  <main class="page article-container">
+      <div
+        class="nav-links"
+        id="navLinks">
 
-    <a href="index.html" class="back-button">
-      ← Back to Home
-    </a>
+        <a href="index.html">
+          ہوم
+        </a>
 
-    <article id="article">
+        <a href="index.html#latest">
+          تازہ ترین
+        </a>
 
-      <div class="article-loading">
-        Loading story...
+        <a href="index.html#pakistan">
+          پاکستان
+        </a>
+
+        <a href="index.html#world">
+          دنیا
+        </a>
+
+        <a href="index.html#sports">
+          کھیل
+        </a>
+
+        <a href="index.html#business">
+          کاروبار
+        </a>
+
+        <a href="index.html#technology">
+          ٹیکنالوجی
+        </a>
+
       </div>
 
-    </article>
+    </div>
+  </nav>
+
+
+  <main>
+
+    <div class="container">
+
+      <div
+        id="article"
+        class="article-page">
+
+        <div class="loading">
+          خبر لوڈ ہو رہی ہے...
+        </div>
+
+      </div>
+
+    </div>
 
   </main>
 
 
-  <script>
+  <footer class="footer">
 
-    document.getElementById("date").textContent =
-      new Date().toLocaleDateString(
-        "en-US",
-        {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        }
-      );
+    <div class="container footer-content">
 
-  </script>
+      <div>
+
+        <div class="footer-logo">
+          <span>ONN</span> TV
+        </div>
+
+        <p>
+          آن لائن نیوز نیٹ ورک
+        </p>
+
+        <p>
+          پاکستان اور دنیا کی تازہ ترین خبریں
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 او این این ٹی وی — جملہ حقوق محفوظ ہیں
+    </div>
+
+  </footer>
 
 
-  <script src="article.js?v=11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="config.js"></script>
+
+  <script src="article.js"></script>
+
+  <script src="script.js"></script>
 
 </body>
 
