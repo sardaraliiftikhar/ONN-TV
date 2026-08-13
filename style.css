@@ -868,3 +868,20 @@ img {
   }
 
 }
+/* ADMIN LINK */
+.footer-menu a[href="admin.html"] {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #ffffff !important;
+  background: #d00000 !important;
+  padding: 8px 14px !important;
+  margin: 4px !important;
+  border-radius: 4px !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
+
+.footer-menu a[href="admin.html"]:hover {
+  background: #a00000 !important;
+}
