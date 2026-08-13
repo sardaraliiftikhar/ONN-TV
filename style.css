@@ -726,3 +726,145 @@ img {
   }
 
 }
+/* =====================================================
+   ONN TV — ADMIN PANEL
+   ===================================================== */
+
+.admin-box {
+  max-width: 850px;
+  margin: 45px auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 8px 30px rgba(0,0,0,.07);
+  padding: 0;
+  overflow: hidden;
+}
+
+.admin-header {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 30px 20px;
+  border-bottom: 5px solid #d90000;
+}
+
+.admin-icon {
+  display: block;
+  font-size: 34px;
+  margin-bottom: 5px;
+}
+
+.admin-header h1 {
+  font-size: 28px;
+  margin-bottom: 3px;
+}
+
+.admin-header p {
+  color: #bbb;
+  font-size: 14px;
+}
+
+#loginForm,
+#newsForm {
+  padding: 35px;
+}
+
+#loginForm label,
+#newsForm label {
+  display: block;
+  font-weight: 700;
+  margin: 16px 0 7px;
+  color: #222;
+}
+
+#loginForm input,
+#newsForm input,
+#newsForm select,
+#newsForm textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  padding: 13px 14px;
+  font-family: inherit;
+  font-size: 15px;
+  outline: none;
+  transition: .2s;
+}
+
+#loginForm input:focus,
+#newsForm input:focus,
+#newsForm select:focus,
+#newsForm textarea:focus {
+  border-color: #d90000;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(217,0,0,.08);
+}
+
+#newsForm textarea {
+  resize: vertical;
+  line-height: 2;
+}
+
+.admin-button {
+  width: 100%;
+  border: 0;
+  background: #d90000;
+  color: #fff;
+  padding: 14px 20px;
+  margin-top: 25px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.admin-button:hover {
+  background: #b50000;
+}
+
+.logout-button {
+  width: 100%;
+  border: 1px solid #222;
+  background: #222;
+  color: #fff;
+  padding: 12px 20px;
+  margin-top: 12px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background: #000;
+}
+
+.admin-message {
+  margin-top: 15px;
+  padding: 10px;
+  text-align: center;
+  color: #555;
+  font-size: 14px;
+}
+
+
+/* Admin mobile */
+
+@media (max-width: 650px) {
+
+  .admin-box {
+    margin: 25px auto;
+    width: 94%;
+  }
+
+  #loginForm,
+  #newsForm {
+    padding: 22px 18px;
+  }
+
+  .admin-header h1 {
+    font-size: 23px;
+  }
+
+}
