@@ -3,122 +3,281 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_PUBLISHABLE_KEY
 );
 
+
 async function loadNews() {
-  const { data, error } = await supabaseClient
-    .from("news")
-    .select("*")
-    .order("created_at", { ascending: false });
+
+  const latestNews =
+    document.getElementById("latestNews");
+
+
+  const { data, error } =
+    await supabaseClient
+
+      .from("news")
+
+      .select("*")
+
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
 
   if (error) {
-    console.error("Supabase error:", error);
-    return;
-  }
 
-  if (!data || data.length === 0) {
-    return;
-  }
+    console.error(error);
 
-  // =========================
-  // LATEST NEWS
-  // =========================
-
-  const latestNews = document.getElementById("latestNews");
-
-  if (latestNews) {
-    latestNews.innerHTML = data.slice(0, 5).map((news, index) => {
-
-      const thumbnail = news.image_url
-        ? `<img src="${news.image_url}" alt="${escapeHtml(news.title)}">`
-        : `<span>${String(index + 1).padStart(2, "0")}</span>`;
-
-      return `
-        <a href="article.html?id=${news.id}" class="mini-card">
-
-          <div class="mini-thumb">
-            ${thumbnail}
-          </div>
-
-          <div>
-            <span>${escapeHtml(news.category || "News")}</span>
-
-            <h3>
-              ${escapeHtml(news.title)}
-            </h3>
-
-            <small>
-              ${formatDate(news.created_at)}
-            </small>
-          </div>
-
-        </a>
-      `;
-    }).join("");
-  }
-
-
-  // =========================
-  // HERO / TOP STORY
-  // =========================
-
-  const hero = document.querySelector(".hero-card");
-
-  if (hero && data[0]) {
-
-    const news = data[0];
-
-    const heroImage = news.image_url
-      ? `<img src="${news.image_url}" alt="${escapeHtml(news.title)}">`
-      : `<span>ONN TV</span>`;
-
-    hero.innerHTML = `
-      <div class="hero-image">
-        ${heroImage}
-      </div>
-
-      <div class="hero-content">
-
-        <span class="category">
-          ${escapeHtml(news.category || "TOP STORY")}
-        </span>
-
-        <h1>
-          ${escapeHtml(news.title)}
-        </h1>
-
-        <p>
-          ${escapeHtml(news.excerpt || "")}
-        </p>
-
-        <a class="read-more" href="article.html?id=${news.id}">
-          Read Full Story →
-        </a>
-
+    latestNews.innerHTML = `
+      <div class="loading">
+        Unable to load news.
       </div>
     `;
+
+    return;
   }
+
+
+  if (!data || data.length === 0) {
+
+    latestNews.innerHTML = `
+      <div class="loading">
+        No news available.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  /* =====================================
+     LATEST NEWS
+     ===================================== */
+
+
+  latestNews.innerHTML =
+    data.slice(0, 6).map(
+
+      (news, index) => {
+
+
+        const image =
+
+          news.image_url
+
+            ? `
+              <img
+                src="${news.image_url}"
+                alt="${escapeHTML(news.title)}"
+              >
+            `
+
+            : `
+              <div class="number">
+                ${String(index + 1).padStart(2, "0")}
+              </div>
+            `;
+
+
+        return `
+
+          <a
+            class="news-card"
+            href="article.html?id=${news.id}"
+          >
+
+
+            <div class="thumbnail">
+
+              ${image}
+
+            </div>
+
+
+            <div class="news-info">
+
+
+              <span class="news-category">
+
+                ${escapeHTML(
+                  news.category || "News"
+                )}
+
+              </span>
+
+
+              <h3>
+
+                ${escapeHTML(
+                  news.title
+                )}
+
+              </h3>
+
+
+              <small>
+
+                ${formatDate(
+                  news.created_at
+                )}
+
+              </small>
+
+
+            </div>
+
+
+          </a>
+
+        `;
+
+      }
+
+    ).join("");
+
+
+  /* =====================================
+     HERO
+     ===================================== */
+
+
+  const top =
+    data[0];
+
+
+  const hero =
+    document.getElementById("hero");
+
+
+  if (!hero || !top) {
+    return;
+  }
+
+
+  const heroImage =
+
+    top.image_url
+
+      ? `
+        <img
+          src="${top.image_url}"
+          alt="${escapeHTML(top.title)}"
+        >
+      `
+
+      : `
+        <div class="hero-placeholder">
+          ONN TV
+        </div>
+      `;
+
+
+  hero.innerHTML = `
+
+
+    <div class="hero-image">
+
+      ${heroImage}
+
+    </div>
+
+
+    <div class="hero-info">
+
+
+      <div class="category">
+
+        ${escapeHTML(
+          top.category || "TOP STORY"
+        )}
+
+      </div>
+
+
+      <h1>
+
+        ${escapeHTML(
+          top.title
+        )}
+
+      </h1>
+
+
+      <p>
+
+        ${escapeHTML(
+          top.excerpt || ""
+        )}
+
+      </p>
+
+
+      <a
+        class="read-button"
+        href="article.html?id=${top.id}"
+      >
+
+        Read Full Story →
+
+      </a>
+
+
+    </div>
+
+  `;
+
 }
 
 
-// =========================
-// DATE
-// =========================
+/* =====================================
+   DATE
+   ===================================== */
+
 
 function formatDate(date) {
-  return new Date(date).toLocaleString();
+
+  return new Date(
+    date
+  ).toLocaleString();
+
 }
 
 
-// =========================
-// SECURITY
-// =========================
+/* =====================================
+   SECURITY
+   ===================================== */
 
-function escapeHtml(value) {
+
+function escapeHTML(value) {
+
   return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
 }
 
 
